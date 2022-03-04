@@ -33,14 +33,14 @@ import "./ExpenseItem.css";
 function ExpenseItem() {
   const date = new Date(2022, 4, 23);
   const title = "Libros";
-  const ammount = 250;
+  const amount = 250;
 
   return (
     <div className="expense-item">
       <div>{date.toLocaleDateString()}</div>
       <div className="expense-item-description">
         <h2>{title}</h2>
-        <div className="expense-item-price">${ammount}</div>
+        <div className="expense-item-price">${amount}</div>
       </div>
     </div>
   );
@@ -53,7 +53,7 @@ export default ExpenseItem;
 
 ### Props
 
-TBD
+Para que los componentes de React puedan ser reutilizables muchas veces es necesario que rendericen contenido dinámico, esto implica que de alguna manera los componentes se deben comunicar o pasar información entre ellos. Los componentes padres pueden pasar información a los hijos mediante los `props`.
 
 ## 📝 Postwork
 
