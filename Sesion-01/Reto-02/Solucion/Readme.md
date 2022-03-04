@@ -1,4 +1,4 @@
-[`React`](../../README.md) > [`Sesión 01: Fundamentos de React`](../Readme.md) > [`Reto 02`](../Readme.md) > Solución
+[`React`](../../../README.md) > [`Sesión 01: Fundamentos de React`](../../Readme.md) > [`Reto 02`](../Readme.md) > Solución
 
 ---
 
