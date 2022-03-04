@@ -63,6 +63,22 @@ Para que los componentes de React puedan ser reutilizables muchas veces es neces
 
 ### Children Props
 
+Ya tenemos varios componentes para nuestra lista de gastos. En lugar de tener todo en `App` separamos la lógica en componentes más pequeños e independientes que pueden ser reutilizados. A esto se le conoce como **composition**. Sólo nos falta ver un concepto más que forma parte del composition en React y es **children props**. Todos los componentes cuentan con un prop especial que se llama **children** el cual contiene todo lo que se encuentre dentro de las etiquetas del componente.
+
+- [`Ejemplo 03`](Ejemplo-03/Readme.md)
+
+Antes de continuar es momento de revisar nuestro directorio. Hasta ahora hemos creado todo dentro de la carpeta `components`, si seguimos así vamos a terminar con cientos de archivos en una misma carpeta. Para evitarlo vamos a organizar nuestros componentes por lógica, crearemos una carpeta `Expenses` donde pondremos todos los componentes que tengan que ver con el renderizado de gastos y haremos otra carpeta `UI` para componentes generales como `Card`.
+
+![Directory](./assets/expenses-directory.png)
+
+> No olvides actualizar las rutas en los imports
+
+### Renderizado de listas
+
+En nuestro componente `Expenses` estamos renderizando `ExpenseItem` varias veces, una por cada elemento del arreglo `expenses`. Esta forma de renderizar nuestra lista no es dinámica, afortunadamente en JSX podemos usar expresiones de JavaScript y renderizar nuestra lista de una mejor manera.
+
+- [`Ejemplo 04`](Ejemplo-04/Readme.md)
+
 ## 📝 Postwork
 
 TBD
