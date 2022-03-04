@@ -116,6 +116,6 @@ function ExpenseItem(props) {
 export default ExpenseItem;
 ```
 
-Con esto ya tenemos con un componente mucho más flexible que renderiza el contenido de manera dinámica con la información que recibe del componente padre.
+Con esto ya tenemos un componente mucho más flexible que renderiza el contenido de manera dinámica con la información que recibe del componente padre.
 
 ![Props](./assets/props.png)

@@ -1,31 +1,48 @@
-[`Backend Fundamentals`](../../README.md) > [`Sesión 01: Consola`](../Readme.md) >[`Ejemplo-01`](../Ejemplo-01) > `Reto 1`
+[`React`](../../README.md) > [`Sesión 01: Fundamentos de React`](../Readme.md) > `Reto 01`
 
-## ¡A comer!
+---
 
-### OBJETIVO 
-- Seguir buenas prácticas.
-- Crear y utilizar componentes.
-- Practicar flexbox
+## Reto 01
 
-#### REQUISITOS 
-- Tener Node instalado.
+1. Crear un nuevo componente `ExpenseDate`.
 
-#### DESARROLLO
+2. Crear `ExpenseDate.css` y agregar los siguientes estilos:
 
-1. Comenzar un nuevo proyecto con `npx create-react-app reto1`.
+```css
+.expense-date {
+  display: flex;
+  flex-direction: column;
+  width: 5rem;
+  height: 5rem;
+  border: 1px solid #e5e5e5;
+  background-color: #464646;
+  color: #e5e5e5;
+  border-radius: 12px;
+  align-items: center;
+  justify-content: center;
+}
 
-2. Seguir las [buenas prácticas para empezar un proyecto](../../BuenasPracticas/EmpezandoProyectos/Readme.md).
+.expense-date-month {
+  font-size: 0.75rem;
+  font-weight: bold;
+}
 
-3. Crear los componentes `Mesa`, `Mantel`, `Plato` y `Cubierto`.
+.expense-date-year {
+  font-size: 0.75rem;
+}
 
-4. Crear el CSS para los componentes en dado caso que sea necesario; puede ser global o por componente.
+.expense-date-day {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+```
 
-5. Conectar los componentes de tal modo que nos quede este resultado:
-<img src="./public/resultado.png" width="400">
+3. La fecha que estamos usando es un objeto `Date` por lo que podemos usar métodos para extraer el mes, día y año. En `ExpenseDate` debes separar la fecha y usar los estilos del paso 2.
 
+4. Importar `ExpenseDate` en `ExpenseItem` y reemplazar la fecha que se está usando en ese componente.
 
-## ❗Importante
+![ExpenseDate](./assets/expense-date.png)
 
-Si no pudiste resolver el reto, no te preocupes,😉 en la parte superior del repositorio encontrarás los archivos con la solución para tu consulta, pero recuerda lo importante es que **lo intentes primero.** 🤓
+---
 
-[`Atrás`](../Ejemplo-01)
+[Solución](./Solucion/Readme.md)

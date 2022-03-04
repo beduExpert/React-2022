@@ -1,30 +1,31 @@
-[`Backend Fundamentals`](../../README.md) > [`Sesión 01: Consola`](../Readme.md) >[`Ejemplo-02`](../Ejemplo-02) > `Reto 2`
+[`React`](../../README.md) > [`Sesión 01: Fundamentos de React`](../Readme.md) > `Reto 02`
 
-## ¡Yo me lo llevo!
+---
 
-### OBJETIVO 
-- Practicar creacion y reutilización de componentes.
-- Practicar flexbox.
+## Reto 02
 
-#### REQUISITOS 
-- Tener Node instalado.
-- Completar el [Reto-01](../Reto-01)
+1. Crear un nuevo componente `Expenses`.
 
-#### DESARROLLO
+2. Crear `Expenses.css` y agregar los siguientes estilos:
 
-1. Abrir nuestro proyecto "A comer!" del [Reto-01](../Reto-01).
+```css
+.expenses {
+  padding: 1rem;
+  background-color: rgba(215, 215, 215, 0.95);
+  margin: 2rem auto;
+  width: 50rem;
+  max-width: 95%;
+  border-radius: 12px;
+  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.25);
+}
+```
 
-2. Crear el componente obligatorio `CentroDeMesa.js` y los que sean necesarios para obtener el resultado.
+3. Dentro de `App` tenemos nuestro arreglo de `expenses` y renderizamos varias veces el componente `ExpenseItem`. En `App` se debe importar `Expenses`, y este último debe contener `ExpenseItem`. **Importante:** Dejar el arreglo `expenses` en `App`.
 
-3. Crear el CSS para los componentes en dado caso que sea necesario; puede ser global o por componente.
+4. Usar los estilos del paso 2.
 
-4. Conectar los componentes de tal modo que nos quede este resultado:
-<img src="./public/resultado.png" width="400">
+![Expenses](./assets/expenses.png)
 
-5. Esperar a ver que tía se llevó el centro de mesa.
+---
 
-## ❗Importante
-
-Si no pudiste resolver el reto, no te preocupes,😉 en la parte superior del repositorio encontrarás los archivos con la solución para tu consulta, pero recuerda lo importante es que **lo intentes primero.** 🤓
-
-[`Atrás`](../Ejemplo-02)
+[Solución](./Solucion/Readme.md)
