@@ -1,48 +1,60 @@
+[`React`](../README.md) > `Sesión 01: Fundamentos de React`
+
+---
+
 # Sesión 01 - Fundamentos de React
 
-🎯 **Objetivos:**
+## 🎯 Objetivos
 
-+ Entender la diferencia entre HTML y JSX.
-+ Ver y aprender cómo react permite la reutilización de componentes.
-+ Maneras de insertar CSS a proyectos con react.
+- Identificar la ventaja de usar React en lugar de Vanilla JavaScript
+- Dominar la sintaxis JSX
+- Construir componentes y pasar datos entre ellos mediante props
+- Mapear listas y renderizar sus elementos
 
-### Secciones:
+## 🛠 Contenido
 
-## 🛠 Prework
+### ¿Qué es React?
 
-**Objetivos:**
+React es una librebría open source de JavaScript creada por el equipo de Facebook para desarrollar interfaces de usuario. React está basado en componentes, estos son como piezas de lego independientes que se pueden componer para crear interfaces complejas.
 
-+ Saber como vivíamos antes de React.js
-+ Saber que es react
-+ Conocer es MVC
+### Componentes
 
-**¿Qué es react?**
+Vamos a retomar la instalación que se hizo durante el prework para desarrollar una aplicación que nos permita dominar los conceptos de esta y las siguientes sesiones. La aplicación que vamos a hacer nos permitirá llevar un registro de gastos.
 
-React también llamada ReactJS es una librería de JavaScript creada por Facebook y publicada como OpenSource, que se diseñó para ayudarnos a desarrollar aplicaciones SPA (Single Page Applications)...[`leer mas`](Prework)
+- [`Ejemplo 01`](Ejemplo-01/Readme.md)
 
-## 🕵 Ejemplos:
+Los componentes de React son reutilizables, si queremos ver varios gastos simplemente debemos agregar las veces que necesitemos el componente `<ExpenseItem />`. Además de esto, en el prework vimos que en JSX podemos usar expresiones de JavaScript, y como los componentes son funciones podemos tener lógica dentro del componente antes de realizar el renderizado.
 
-+ [`Ejemplo 01: Techo del cielo`](Ejemplo-01)
-+ [`Ejemplo 02: Luz Mercurial`](Ejemplo-02)
+En nuestro componente `<ExpenseItem />` agregamos la fecha, descripción y monto directamente en el JSX, pero podemos crear variables y usar expresiones para crear un componente que sea más flexible:
 
-## 💻 Retos:
+```jsx
+import "./ExpenseItem.css";
 
-+ [`Reto 01: ¡A comer!`](Reto-01)
-+ [`Reto 02: ¡Yo me lo llevo!`](Reto-02)
+function ExpenseItem() {
+  const date = new Date(2022, 4, 23);
+  const title = "Libros";
+  const ammount = 250;
 
-## 🛡 Postwork
+  return (
+    <div className="expense-item">
+      <div>{date.toLocaleDateString()}</div>
+      <div className="expense-item-description">
+        <h2>{title}</h2>
+        <div className="expense-item-price">${ammount}</div>
+      </div>
+    </div>
+  );
+}
 
-**Mejorando nuestra Luz Mercurial**...[`leer más`](Postwork/)
+export default ExpenseItem;
+```
 
+> El constructor `Date` genera un objeto `Date` que tiene distintos métodos como `toLocaleDateString()` que genera una cadena con una representación de la fecha en el formato indicado. Esto es de JavaScript, no de React.
 
-## ⚛ ORGANIZACION DE LA CLASE
-+ Qué es React
-+ create-react-app
-+ Qué es JSX
-+ Buenas prácticas para comenzar un proyecto
-+ Creando componentes
-+ Insertando CSS global
-+ Insertando CSS por componente
-+ Reutilización de componentes
+### Props
 
-### 🎩 [Buenas prácticas para empezar un proyecto](../BuenasPracticas/EmpezandoProyectos/Readme.md).
+TBD
+
+## 📝 Postwork
+
+TBD
