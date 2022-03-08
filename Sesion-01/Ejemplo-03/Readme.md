@@ -1,8 +1,8 @@
-[`React`](../../README.md) > [`Sesión 01: Fundamentos de React`](../Readme.md) > `Ejemplo 03`
+[`React`](../../README.md) > [`Sesión 01: Fundamentos de React`](../Readme.md) > `Ejemplo 03: Children Props`
 
 ---
 
-## Ejemplo 03
+## Ejemplo 03: Children Props
 
 En este ejemplo vamos a crear un nuevo componente `Card` que nos servirá como contenedor o wrapper de varios componentes. Este componente tendrá los siguientes estilos:
 

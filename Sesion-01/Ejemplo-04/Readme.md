@@ -1,8 +1,8 @@
-[`React`](../../README.md) > [`Sesión 01: Fundamentos de React`](../Readme.md) > `Ejemplo 04`
+[`React`](../../README.md) > [`Sesión 01: Fundamentos de React`](../Readme.md) > `Ejemplo 04: Renderizado de listas`
 
 ---
 
-## Ejemplo 04
+## Ejemplo 04: Renderizado de listas
 
 React puede renderizar múltiples componentes que se encuentren dentro de un arreglo. Vamos a aprovechar esto y usaremos el método [`map`](https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Global_Objects/Array/map) para construir un arreglo de componentes con todos los elementos de `expenses`.
 

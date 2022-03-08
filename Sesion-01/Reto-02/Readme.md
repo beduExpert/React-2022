@@ -1,8 +1,8 @@
-[`React`](../../README.md) > [`Sesión 01: Fundamentos de React`](../Readme.md) > `Reto 02`
+[`React`](../../README.md) > [`Sesión 01: Fundamentos de React`](../Readme.md) > `Reto 02: Props`
 
 ---
 
-## Reto 02
+## Reto 02: Props
 
 1. Crear un nuevo componente `Expenses`.
 

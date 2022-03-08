@@ -1,8 +1,8 @@
-[`React`](../../README.md) > [`Sesión 01: Fundamentos de React`](../Readme.md) > `Ejemplo 02`
+[`React`](../../README.md) > [`Sesión 01: Fundamentos de React`](../Readme.md) > `Ejemplo 02: Props`
 
 ---
 
-## Ejemplo 02
+## Ejemplo 02: Props
 
 Ahora vamos a mostrar varios gastos en lugar de uno solo, para que podamos reutilizar nuestro componente `ExpenseItem` necesitamos mover la fecha, descripción y monto al componente `App`, lo haremos en un arreglo para que sea más fácil agrupar la información.
 

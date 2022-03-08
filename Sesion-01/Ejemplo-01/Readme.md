@@ -1,8 +1,8 @@
-[`React`](../../README.md) > [`Sesión 01: Fundamentos de React`](../Readme.md) > `Ejemplo 1`
+[`React`](../../README.md) > [`Sesión 01: Fundamentos de React`](../Readme.md) > `Ejemplo 1: Componentes`
 
 ---
 
-## Ejemplo 01
+## Ejemplo 01: Componentes
 
 Empecemos por crear un nuevo archivo dentro de la carpeta `components`, este archivo lo nombraremos `ExpenseItem.js`. En React podemos nombrar los archivos como queramos pero es una convención empezar cada palabra con mayúscula. En `ExpenseItem.js` agregamos el siguiente código:
 
