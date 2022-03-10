@@ -1,131 +1,160 @@
-[`React Fundamentals`](../../README.md) > [`Sesión 02: Estado (state) y Propiedades (props)`](../Readme.md) > `Ejemplo 1`
+[`React`](../../README.md) > [`Sesión 02: React State y Eventos`](../Readme.md) > `Ejemplo 01: Event Handlers`
 
-## Patricio
+---
 
-### OBJETIVO 
-- Usar componente stateful (clase).
-- Convertir de stateless (funcional) a stateful (clase).
-- Cómo declarar y usar el estado en componente stateful.
+## Ejemplo 01: Event Handlers
 
-#### REQUISITOS
-- Haber completado el [Ejemplo-02](../../Sesion-01/Ejemplo-02) de la Sesion-01.
+El componente `NewExpense` será el contenedor de nuestro formulario:
 
-#### DESARROLLO
+```jsx
+import Card from "../UI/Card";
+import ExpenseForm from "./ExpenseForm";
+import "./NewExpense.css";
 
-1. Abrir nuestro proyecto "Luz Mercurial" del [Ejemplo-02](../../Sesion-01/Ejemplo-02) de la Sesion-01.
+function NewExpense() {
+  return (
+    <Card className="new-expense">
+      <ExpenseForm />
+    </Card>
+  );
+}
 
-2. Ya tenemos nuestros focos con luces naranjas, lo que vamos a hacer es definir el color de las luces con el estado de React.
-
-3. Abrimos nuestro archivo `Luz.js` y como primer paso tenemos que cambiar el tipo de componente a que sea stateful (componente clase).
-
-4. Cambiamos la linea de declaración de esto: `const Luz = () => {` a esto `class Luz extends React.Component {`; no va a funcionar porque todavia no terminamos.
+export default NewExpense;
 ```
-import React from 'react';
-import '../css/Luz.css';
 
-class Luz extends React.Component {
-   return (
-      <div className="luz">
+Agregamos los estilos de `NewExpense`:
+
+```css
+.new-expense {
+  background-color: rgba(215, 215, 215, 0.75);
+  padding: 1rem;
+  margin: 2rem auto;
+  width: 50rem;
+  max-width: 95%;
+}
+
+.new-expense button {
+  font: inherit;
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+  border: 1px solid #464646;
+  background-color: #464646;
+  color: #e5e5e5;
+  border-radius: 12px;
+  margin-right: 1rem;
+}
+
+.new-expense button:hover,
+.new-expense button:active {
+  background-color: #afafaf;
+  border-color: #afafaf;
+  color: black;
+}
+```
+
+Nuestro formulario tendrá 3 inputs, uno para la descripción del gasto, otro para el monto y el último para la fecha, también crearemos un botón para agregar los gastos. Vamos a colocar el siguiente código en `ExpenseForm`:
+
+```jsx
+import "./ExpenseForm.css";
+
+function ExpenseForm() {
+  return (
+    <form>
+      <div className="new-expense-controls">
+        <div className="new-expense-control">
+          <label>Descripción</label>
+          <input type="text" />
+        </div>
+        <div className="new-expense-control">
+          <label>Monto</label>
+          <input type="number" min="1" step="1" />
+        </div>
+        <div className="new-expense-control">
+          <label>Fecha</label>
+          <input type="date" min="2019-01-01" max="2022-12-31" />
+        </div>
       </div>
-   );
-};
+      <div className="new-expense-actions">
+        <button type="submit">Agregar</button>
+      </div>
+    </form>
+  );
+}
 
-export default Luz;
+export default ExpenseForm;
 ```
 
-5. Ahora vamos a añadir el `render()`, esto es lo que falta alrededor del `return`; con esto, nuestra applicación vuelve a funcionar.
-```
-import React from 'react';
-import '../css/Luz.css';
+Agregamos los estilos de `ExpenseForm`:
 
-class Luz extends React.Component {
-   render() {
-      return (
-         <div className="luz">
-         </div>
-      );
-   }
-};
+```css
+.new-expense-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  text-align: left;
+}
 
-export default Luz;
-``` 
+.new-expense-control label {
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  display: block;
+}
 
-6. Vamos a declarar nuestro estado del componente añadiendo el `constructor`.
-```
-import React from 'react';
-import '../css/Luz.css';
+.new-expense-control input {
+  font: inherit;
+  padding: 0.5rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  width: 20rem;
+  max-width: 100%;
+}
 
-class Luz extends React.Component {
-   constructor(props) {
-      super(props);
-      this.state = {
-         color: 'pink'
-      };
-   }
-
-   render() {
-      return (
-         <div className="luz">
-         </div>
-      );
-   }
-};
-
-export default Luz;
+.new-expense-actions {
+  text-align: right;
+}
 ```
 
-7. Vamos a sobreescribir el CSS del componente, poniendole el color directamente en la etiqueta JSX.
-```
-import React from 'react';
-import '../css/Luz.css';
+Para poder ver lo que hemos hecho hasta ahora solo nos falta reemplazar el mensaje "Hello World" que tenemos en `App` por nuestro componente `NewExpense`.
 
-class Luz extends React.Component {
-   constructor(props) {
-      super(props);
-      this.state = {
-         color: 'pink'
-      };
-   }
+![New Expense](./assets/new-expense.png)
 
-   render() {
-      return (
-         <div style={{ backgroundColor: this.state.color }} className="luz">
-         </div>
-      );
-   }
-};
+Si haces click en el botón `Agregar` te darás cuenta que la página se vuelve a cargar y la aplicación de React se reinicia. Esto se debe a que el comportamiento por defecto de los formularios en HTML es llevar al usuario a otra página. Vamos a agregar un event handler de tipo submit al formulario y evitaremos que la página cargue de nuevo.
 
-export default Luz;
-```
+```jsx
+import "./ExpenseForm.css";
 
-8. Cuando vemos el resultado nos da alegría de saber que es casi tan hermoso como nosotros (paso obligatorio).
+function ExpenseForm() {
+  const submitHandler = (event) => {
+    event.preventDefault();
+  };
 
-9. Vamos a hacer lo mismo con `LuzMercurial.js`; convertirlo en componente stateful (clase), agregar el estado (state) con algún color y sobreescribirlo.
-```
-import React from 'react';
+  return (
+    <form onSubmit={submitHandler}>
+      <div className="new-expense-controls">
+        <div className="new-expense-control">
+          <label>Descripción</label>
+          <input type="text" />
+        </div>
+        <div className="new-expense-control">
+          <label>Monto</label>
+          <input type="number" min="1" step="1" />
+        </div>
+        <div className="new-expense-control">
+          <label>Fecha</label>
+          <input type="date" min="2019-01-01" max="2022-12-31" />
+        </div>
+      </div>
+      <div className="new-expense-actions">
+        <button type="submit">Agregar</button>
+      </div>
+    </form>
+  );
+}
 
-class LuzMercurial extends React.Component {
-   constructor(props) {
-      super(props);
-      this.state = {
-         color: 'pink'
-      };
-   }
-
-   render() {
-      return (
-         <div
-            className="luzMercurial"
-            style={{ backgroundColor: this.state.color }}
-         />
-      );
-   }
-};
-
-export default LuzMercurial;
+export default ExpenseForm;
 ```
 
-10. Resultado
-<img src="./public/resultado.png" width="400">
+Recuerda que en JSX debemos usar `onSubmit` y no `onsubmit`, además debemos de proporcionarle una referencia a la función y no ejecutar la función. Si usamos `onSubmit={submitHandler()}` estamos ejecutando `submitHandler()` inmediatamente y no cuando demos click en el botón agregar.
 
-[`Siguiente: Reto-01`](../Reto-01)
+Por último, `event` es un evento sintético de React, es una instancia de **SyntheticEvent** y cuenta con los mismos métodos de los eventos nativos de JavaScript como `preventDefault()`. Este método como su nombre lo indica evita el comportamiento que tiene un nodo por defecto, en este caso evita que el formulario intente llevar al usuario a otro sitio ocasionando que la aplicación completa se reinicie.

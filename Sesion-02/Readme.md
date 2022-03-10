@@ -1,48 +1,25 @@
-## Sesión 02: Estado (state) y Propiedades (props)
+[`React`](../README.md) > `Sesión 02: React State y Eventos`
 
-🎯 **Objetivos:**
+---
 
-+ Introducción de **componentes stateful (clase)**.
-+ Entender la diferencia entre **componentes stateless (funcionales)** y **stateful (clase)**.
-+ Cómo **declarar** y usar el estado en **componente stateful**.
-+ Cómo **declarar**, **mandar** y usar **valores** para usarse como **propiedades**.
-+ Entender el **virtual DOM**.
+# Sesión 02 - React State y Eventos
 
-### Secciones:
+## 🎯 Objetivos
 
-## 🛠 Prework
+TBD
 
-**Objetivos:**
+## 🛠 Contenido
 
-+ Saber que son las **Props (Propiedades)**
-+ Conocer que es el **Estado (State)**
-+ Saber que es **this.state**
+### Event Handlers
 
-**¿Qué son las Props (Propiedades)?**
+En la sesión anterior creamos nuestra aplicación de gastos y agregamos una lista de elementos, sin embargo, esta lista no es dinámica. En esta sesión agregaremos nuevos elementos a nuestra lista de gastos y nos apoyaremos de eventos para esto. Los componentes de React manejan eventos de una manera muy similar a como lo hacemos con nodos del DOM cuando usamos JavaScript.
 
-Las propiedades son la manera que tienen los componentes de React de comunicarse entre sí...[`leer mas`](Prework)
+Para ver este tema vamos a empezar creando una nueva carpeta dentro de `components` y la vamos a llamar `NewExpense`, en esta carpeta irán todos los componentes necesarios para crear un formulario que nos permita agregar nuevos gastos. Vamos a crear dos componentes en esta carpeta, `NewExpense` y `ExpenseForm` junto con sus respectivos archivos CSS.
 
-## 🕵 Ejemplos:
+![New Expense Directory](./assets/new-expense-directory.png)
 
-+ [`Ejemplo 01: Patricio`](Ejemplo-01)
+- [`Ejemplo 01: Event Handlers`](Ejemplo-01/Readme.md)
 
-+ [`Ejemplo 02: Gracias Abuelo`](Ejemplo-02)
+- [`Reto 01: Event Handlers`](Reto-01/Readme.md)
 
-## 💻 Retos:
-+ [`Reto 01: Tía Socorro ganó`](Reto-01)
-
-+ [`Reto 02: Cada quien su mantel`](Reto-02)
-
-## 🛡 Postwork
-
-**Mejorando el reto cada quien su mantel**...[`leer más`](Postwork/)
-
-## ⚛  ORGANIZACION DE LA CLASE 
-+ Componentes stateless (funcionales) VS stateful (clase).
-+ Conversión de stateless a stateful y viceversa.
-+ Cuándo y porqué usar cada componente.
-+ Declaración y utilización de estado (state).
-+ Declaración y utilización de propiedades (props) en los 2 tipos de componente
-+ Buenas prácticas de propiedades (librería prop-types).
-
-### 🎩 [Buenas prácticas para las propiedades (props)](../BuenasPracticas/PropTypes/Readme.md).
+## 📝 Postwork
