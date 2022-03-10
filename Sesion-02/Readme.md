@@ -22,4 +22,12 @@ Para ver este tema vamos a empezar creando una nueva carpeta dentro de `componen
 
 - [`Reto 01: Event Handlers`](Reto-01/Readme.md)
 
+### State y useState hook
+
+Ya vimos cómo usar los props para pasar información entre componentes y hacerlos dinámicos. El state es similar a los props en el sentido que contienen la información que el componente necesita, pero difiere de los props porque el state es privado y el componente es el que tiene el control. Cada componente es independiente y tiene su propio state.
+
+Como estamos trabajando con componentes funcionales usaremos el hook useState, recuerda que inicialmente el state era exclusivo de las clases. Los hooks son funciones especiales que permiten a los componentes usar características de las clases como el state.
+
+- [`Ejemplo 02: useState hook`](Ejemplo-02/Readme.md)
+
 ## 📝 Postwork
