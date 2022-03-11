@@ -6,7 +6,9 @@
 
 ## 🎯 Objetivos
 
-TBD
+- Manejar eventos en React
+- Manipular el State de un componente mediante el hook useState
+- Actualizar el State con el input de un usuario
 
 ## 🛠 Contenido
 
@@ -37,5 +39,9 @@ Como estamos trabajando con componentes funcionales usaremos el hook useState, r
 Nuestro componente `ExpenseForm` ya cuenta con state y es capaz de actualizarlo con la información que proporcione el usuario. Ahora necesitamos que esa información llegue varios niveles arriba hasta el componente `App` que es donde tenemos la lista `expenses`. ¿Cómo hacemos esto si antes dijimos que la información fluye de componentes padres a hijos? De la misma forma, usando `props`. Así como pasamos strings, arreglos u objetos a través de los `props`, también podemos pasar referencias a funciones. Veamos cómo hacerlo un nivel a la vez.
 
 - [`Ejemplo 04: Comunicación hijo a padre`](./Ejemplo-04/Readme.md)
+
+### Renderizado condicional
+
+El renderizado condicional se referie a mostrar cierto contenido u otro dependiendo de si una condición se cumple o no. En nuestra aplicación por ejemplo, un buen uso sería en la lista de gastos, si tenemos gastos se renderizan pero si no tenemos gastos podemos mostrar un mensaje alternativo.
 
 ## 📝 Postwork

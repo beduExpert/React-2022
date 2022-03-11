@@ -1,29 +1,73 @@
-[`React Fundamentals`](../../README.md) > [`Sesión 02: Estado (state) y Propiedades (props)`](../Readme.md) >[`Ejemplo-02`](../Ejemplo-02) > `Reto 2`
+[`React`](../../README.md) > [`Sesión 02: React State y Eventos`](../Readme.md) > `Reto 02: Renderizado Condicional`
 
-## Cada quien su mantel
+---
 
-### OBJETIVO
-- Usar componente stateful (clase).
-- Convertir de stateless (funcional) a stateful (clase).
-- Cómo declarar y usar el estado en componente stateful.
+## Reto 02: Renderizado Condicional
 
-#### REQUISITOS 
-- Tener Node instalado.
-- Completar el [Reto-01](../Reto-01)
+1. Dentro de la carpeta expenses crear un nuevo componente `ExpensesFilter` y agregar el siguiente código:
 
-#### DESARROLLO
+```jsx
+import "./ExpensesFilter.css";
 
-1. Abrir nuestro proyecto "Tía Socorro ganó" del [Reto-01](../Reto-01).
+function ExpensesFilter() {
+  return (
+    <div className="expenses-filter">
+      <div className="expenses-filter-control">
+        <label>Filtrar por año</label>
+        <select>
+          <option value="2022">2022</option>
+          <option value="2021">2021</option>
+          <option value="2020">2020</option>
+          <option value="2019">2019</option>
+        </select>
+      </div>
+    </div>
+  );
+}
 
-2. Modificar el código necesario para que nuestros manteles acepten parámetros de `backgroundColor` y `height` y usarlos como prioridad.
+export default ExpensesFilter;
+```
 
-3. No olvides seguir las [buenas prácticas para las propiedades (props)](../../BuenasPracticas/PropTypes/Readme.md).
+2. En la misma carpeta crear el archivo `ExpensesFilter.css` y agregar los siguientes estilos:
 
-4. Resultado:
-<img src="./public/resultado.png" width="400">
+```css
+.expenses-filter {
+  padding: 0 1rem;
+}
 
-## ❗Importante
+.expenses-filter-control {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+}
 
-Si no pudiste resolver el reto, no te preocupes,😉 en la parte superior del repositorio encontrarás los archivos con la solución para tu consulta, pero recuerda lo importante es que **lo intentes primero.** 🤓
+.expenses-filter label {
+  font-weight: bold;
+}
 
-[`Atrás`](../Ejemplo-02)
+.expenses-filter select {
+  font: inherit;
+  padding: 0.3rem 1.5rem;
+  font-weight: bold;
+  border-radius: 6px;
+}
+```
+
+3. Importar `ExpensesFilter` en `Expenses` y renderizarlo dentro de `<Card>` justo antes de la lista de gastos.
+
+4. Agregar state en `Expenses` para guardar el año, inicializarlo con el string `'2022'`.
+
+5. Crear un handler para actualizar el state del paso anterior.
+
+6. Crear una función que filtre los gastos por año. Esta función debe crear un nuevo arreglo en lugar de modificar el existente.
+
+7. Pasar tanto el handler como el año al nuevo componente `ExpensesFilter`, recuerda lo que vimos sobre two-way binding.
+
+8. Si el nuevo arreglo no contiene gastos mostrar el mensaje `No se encontraron gastos`, en caso contrario mostrar los gastos filtrados por año.
+
+![Conditional Rendering](./assets/conditional-rendering.png)
+
+---
+
+[Solución](./Solucion/Readme.md)
