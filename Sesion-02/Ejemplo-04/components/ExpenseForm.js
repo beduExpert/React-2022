@@ -1,29 +1,37 @@
-[`React`](../../../README.md) > [`Sesión 02: React State y Eventos`](../../Readme.md) > [`Reto 01`](../Readme.md) > Solución
-
----
-
-## Reto 01: Solución
-
-### `ExpenseForm.js`
-
-```jsx
+import { useState } from "react";
 import "./ExpenseForm.css";
 
-function ExpenseForm() {
+function ExpenseForm(props) {
+  const [title, setTitle] = useState("");
+  const [amount, setAmount] = useState("");
+  const [date, setDate] = useState("");
+
   const titleChangeHandler = (event) => {
-    console.log(`Description: ${event.target.value}`);
+    setTitle(event.target.value);
   };
 
   const amountChangeHandler = (event) => {
-    console.log(`Amount: ${event.target.value}`);
+    setAmount(event.target.value);
   };
 
   const dateChangeHandler = (event) => {
-    console.log(`Date: ${event.target.value}`);
+    setDate(event.target.value);
   };
 
   const submitHandler = (event) => {
     event.preventDefault();
+
+    const expense = {
+      title,
+      amount,
+      date: new Date(date),
+    };
+
+    props.onSaveExpense(expense);
+
+    setTitle("");
+    setAmount("");
+    setDate("");
   };
 
   return (
@@ -31,7 +39,7 @@ function ExpenseForm() {
       <div className="new-expense-controls">
         <div className="new-expense-control">
           <label>Descripción</label>
-          <input type="text" onChange={titleChangeHandler} />
+          <input type="text" value={title} onChange={titleChangeHandler} />
         </div>
         <div className="new-expense-control">
           <label>Monto</label>
@@ -39,6 +47,7 @@ function ExpenseForm() {
             type="number"
             min="1"
             step="1"
+            value={amount}
             onChange={amountChangeHandler}
           />
         </div>
@@ -48,6 +57,7 @@ function ExpenseForm() {
             type="date"
             min="2019-01-01"
             max="2022-12-31"
+            value={date}
             onChange={dateChangeHandler}
           />
         </div>
@@ -60,4 +70,3 @@ function ExpenseForm() {
 }
 
 export default ExpenseForm;
-```

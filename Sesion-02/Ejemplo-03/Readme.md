@@ -8,38 +8,38 @@ En el ejemplo anterior creamos tres variables de estado, una por cada input. No 
 
 ```jsx
 const [data, setData] = useState({
-  description: "",
+  title: "",
   amount: "",
   date: "",
 });
 ```
 
-Aquí por ejemplo usamos un solo state y agrupamos todo en el mismo objeto. Un cambio como este implica ajustar los handlers también ya que cada uno contiene el valor de un solo input, tendríamos que decirle a `setData` que sobreescriba solo un valor del state. Esto se podría lograr haciendo uso de object destructuring, veamos cómo sería si actualizamos `descriptionChangeHandler`:
+Aquí por ejemplo usamos un solo state y agrupamos todo en el mismo objeto. Un cambio como este implica ajustar los handlers también ya que cada uno contiene el valor de un solo input, tendríamos que decirle a `setData` que sobreescriba solo un valor del state. Esto se podría lograr haciendo uso de object destructuring, veamos cómo sería si actualizamos `titleChangeHandler`:
 
 ```jsx
 const [data, setData] = useState({
-  description: "",
+  title: "",
   amount: "",
   date: "",
 });
 
-const descriptionChangeHandler = (event) => {
+const titleChangeHandler = (event) => {
   setData({
     ...data,
-    description: event.target.value,
+    title: event.target.value,
   });
 };
 ```
 
-Con este cambio `setState` copia todo lo que esté en `data` en ese momento y actualiza solamente `description`. Esto nos va a funcionar la mayoría de las veces, sin embargo, React agenda las actualizaciones de estado, es decir, no las hace instantáneamente y esto puede ser un problema cuando queremos actualizar un state que depende de un valor anterior del mismo state, cabe la posibilidad de tener un state desactualizado al momento que React ejecute `setState`.
+Con este cambio `setState` copia todo lo que esté en `data` en ese momento y actualiza solamente `title`. Esto nos va a funcionar la mayoría de las veces, sin embargo, React agenda las actualizaciones de estado, es decir, no las hace instantáneamente y esto puede ser un problema cuando queremos actualizar un state que depende de un valor anterior del mismo state, cabe la posibilidad de tener un state desactualizado al momento que React ejecute `setState`.
 
 Cuando queremos actualizar state que depende de un state anterior podemos pasarle una función a `setState` con el argumento `prevState`. React se asegurará de darnos la versión más actualizada de ese state que necesitamos y la guardará en dicho objeto `prevState`.
 
 ```jsx
-const descriptionChangeHandler = (event) => {
+const titleChangeHandler = (event) => {
   setData((prevState) => ({
     ...prevState,
-    description: event.target.value,
+    title: event.target.value,
   }));
 };
 ```
@@ -52,15 +52,15 @@ import "./ExpenseForm.css";
 
 function ExpenseForm() {
   const [data, setData] = useState({
-    description: "",
+    title: "",
     amount: "",
     date: "",
   });
 
-  const descriptionChangeHandler = (event) => {
+  const titleChangeHandler = (event) => {
     setData((prevState) => ({
       ...prevState,
-      description: event.target.value,
+      title: event.target.value,
     }));
   };
 
@@ -82,7 +82,7 @@ function ExpenseForm() {
     event.preventDefault();
 
     const expense = {
-      description: data.description,
+      title: data.title,
       amount: data.amount,
       date: data.date,
     };
@@ -95,11 +95,7 @@ function ExpenseForm() {
       <div className="new-expense-controls">
         <div className="new-expense-control">
           <label>Descripción</label>
-          <input
-            type="text"
-            value={data.description}
-            onChange={descriptionChangeHandler}
-          />
+          <input type="text" value={data.title} onChange={titleChangeHandler} />
         </div>
         <div className="new-expense-control">
           <label>Monto</label>

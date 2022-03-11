@@ -13,22 +13,22 @@ import { useState } from "react";
 import "./ExpenseForm.css";
 
 function ExpenseForm() {
-  const [description, setDescription] = useState("");
+  const [title, setTitle] = useState("");
 
   ...
 ```
 
-Ahora en el handler del reto 1 vamos a reemplazar el `console.log` por `setDescription` para actualizar nuestro nuevo state:
+Ahora en el handler del reto 1 vamos a reemplazar el `console.log` por `setTitle` para actualizar nuestro nuevo state:
 
 ```jsx
 import { useState } from "react";
 import "./ExpenseForm.css";
 
 function ExpenseForm() {
-  const [description, setDescription] = useState("");
+  const [title, setTitle] = useState("");
 
-  const descriptionChangeHandler = (event) => {
-   setDescription(event.target.value);
+  const titleChangeHandler = (event) => {
+   setTitle(event.target.value);
   };
 
   ...
@@ -39,7 +39,7 @@ Con este cambio nuestro input ya puede actualizar el state con la información q
 ```jsx
 <div className="new-expense-control">
   <label>Descripción</label>
-  <input type="text" value={description} onChange={descriptionChangeHandler} />
+  <input type="text" value={title} onChange={titleChangeHandler} />
 </div>
 ```
 
@@ -50,12 +50,12 @@ import { useState } from "react";
 import "./ExpenseForm.css";
 
 function ExpenseForm() {
-  const [description, setDescription] = useState("");
+  const [title, setTitle] = useState("");
   const [amount, setAmount] = useState("");
   const [date, setDate] = useState("");
 
-  const descriptionChangeHandler = (event) => {
-    setDescription(event.target.value);
+  const titleChangeHandler = (event) => {
+    setTitle(event.target.value);
   };
 
   const amountChangeHandler = (event) => {
@@ -75,11 +75,7 @@ function ExpenseForm() {
       <div className="new-expense-controls">
         <div className="new-expense-control">
           <label>Descripción</label>
-          <input
-            type="text"
-            value={description}
-            onChange={descriptionChangeHandler}
-          />
+          <input type="text" value={title} onChange={titleChangeHandler} />
         </div>
         <div className="new-expense-control">
           <label>Monto</label>
@@ -119,7 +115,7 @@ const submitHandler = (event) => {
   event.preventDefault();
 
   const expense = {
-    description,
+    title,
     amount,
     date,
   };

@@ -18,7 +18,7 @@ Para ver este tema vamos a empezar creando una nueva carpeta dentro de `componen
 
 ![New Expense Directory](./assets/new-expense-directory.png)
 
-- [`Ejemplo 01: Event Handlers`](Ejemplo-01/Readme.md)
+- [`Ejemplo 01: Event Handlers`](./Ejemplo-01/Readme.md)
 
 - [`Reto 01: Event Handlers`](Reto-01/Readme.md)
 
@@ -28,10 +28,14 @@ Ya vimos cómo usar los props para pasar información entre componentes y hacerl
 
 Como estamos trabajando con componentes funcionales usaremos el hook useState, recuerda que inicialmente el state era exclusivo de las clases. Los hooks son funciones especiales que permiten a los componentes usar características de las clases como el state.
 
-- [`Ejemplo 02: useState hook`](Ejemplo-02/Readme.md)
+- [`Ejemplo 02: useState hook`](./Ejemplo-02/Readme.md)
 
-- [`Ejemplo 03: prevState`](Ejemplo-03/Readme.md)
+- [`Ejemplo 03: prevState`](./Ejemplo-03/Readme.md)
 
 ### Comunicación de componente hijo a padre
+
+Nuestro componente `ExpenseForm` ya cuenta con state y es capaz de actualizarlo con la información que proporcione el usuario. Ahora necesitamos que esa información llegue varios niveles arriba hasta el componente `App` que es donde tenemos la lista `expenses`. ¿Cómo hacemos esto si antes dijimos que la información fluye de componentes padres a hijos? De la misma forma, usando `props`. Así como pasamos strings, arreglos u objetos a través de los `props`, también podemos pasar referencias a funciones. Veamos cómo hacerlo un nivel a la vez.
+
+- [`Ejemplo 04: Comunicación hijo a padre`](./Ejemplo-04/Readme.md)
 
 ## 📝 Postwork
