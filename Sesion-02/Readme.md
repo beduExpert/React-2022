@@ -44,6 +44,6 @@ Nuestro componente `ExpenseForm` ya cuenta con state y es capaz de actualizarlo 
 
 El renderizado condicional se referie a mostrar cierto contenido u otro dependiendo de si una condición se cumple o no. En nuestra aplicación por ejemplo, un buen uso sería en la lista de gastos, si tenemos gastos se renderizan pero si no tenemos gastos podemos mostrar un mensaje alternativo.
 
-- [`Reto 02: Renderizado condicional`](./Reto-01/Readme.md)
+- [`Reto 02: Renderizado condicional`](./Reto-02/Readme.md)
 
 ## 📝 Postwork
