@@ -6,9 +6,9 @@
 
 ## 🎯 Objetivos
 
-- Manejar eventos en React
+- Distinguir los eventos en React
 - Manipular el State de un componente mediante el hook useState
-- Actualizar el State con el input de un usuario
+- Emplear el State con el input de un usuario
 
 ## 🛠 Contenido
 
