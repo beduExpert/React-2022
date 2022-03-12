@@ -1,26 +1,25 @@
-[`React Fundamentals`](../../README.md) > [`Sesión 02: Estado (state) y Propiedades (props)`](../Readme.md) > `Postwork`
+[`React`](../../README.md) > [`Sesión 02: React State y Evento`](../Readme.md) > `Postwork`
 
-#### REQUISITOS
-- Tener Node instalado.
-- Completar el [Reto-02](../Reto-02)
+---
 
+# Postwork
 
-#### DESARROLLO
+## 🎯 Objetivos
 
-1. Abrir nuestro proyecto "Cada quien su mantel" del [Reto-02](../Reto-02).
+- Manejar eventos de React
+- Utilizar el hook useState para manipular el estado
 
-2. Hacer que los `<Cubierto />` reciban como parámetro algún color o que usen el CSS por defecto.
+## 🛠 Desarrollo
 
-3. Este color va a ser mandado a `<Mantel />` y debe de llegar hasta el `<Cubierto />`. Ejemplo:
-```
-<Mantel
-   height={100}
-   colorCubierto="coral"
-   backgroundColor="green"
-/>
-```
+En la sesión anterior creaste la estructura inicial de `ReactMeals`, agregaste algunos estilos y renderizaste platillos del menú. Con lo visto en esta sesión estás listo para manejar eventos y manipular el state para agregar elementos al carrito de compra.
 
-4. No olvides seguir las [buenas prácticas para las propiedades (props)](../../BuenasPracticas/PropTypes/Readme.md).
+- Crear un componente `Cart`. Por el momento sólo es necesario mostrar el número de elementos agregados al carrito, más adelante aprenderás lo necesario para mostrar el detalle del carrito en un modal.
+- Si aún no lo has hecho, agrega un botón de `Agregar` a cada platillo del menú junto con un input que permita al usuario cambiar la cantidad.
+- Crea los event handlers necesarios para estos nuevos elementos (input y botón).
+- Utiliza el hook `useState` para manipular las cantidades del carrito de compras.
 
-5. Resultado:
-<img src="./public/resultado.png" width="400">
+### Imágen de referencia
+
+Recuerda que el diseño de la aplicación es a tu gusto, por lo que los colores y el acomodo de los elementos está completamente a tu criterio. A continuación te mostramos una imágen que te servirá como referencia de lo que llevamos hasta el momento:
+
+![ReactMeals](./assets/react-meals.png)
