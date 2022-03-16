@@ -1,454 +1,233 @@
-[`React Fundamentals`](../../README.md) > [`Sesión 03: Estado (state) y Propiedades (props)`](../Readme.md) > `Ejemplo 2`
+[`React`](../../README.md) > [`Sesión 03: Trabajando con estilos`](../Readme.md) > `Ejemplo 02: Estilos dinámicos con CSS Modules`
 
-## Complejidad, bienvenida
+---
 
-### OBJETIVO
-- Modificar el estado.
-- Modificar estado del padre por medio de funciones mandadas como props.
-- Introducción de los ciclos de vida: DidMount, WillUnmount, DidUpdate.
-- Entender en que momento se ejecuta cada uno.
-- Usar los eventos onClick y onChange.
+## Ejemplo 02: Estilos dinámicos con CSS Modules
 
-#### REQUISITOS 
-- Tener Node instalado.
+Con estilos dinámicos nos referimos a cambiar, agregar o quitar clases de CSS dependiendo de cierta condición. Para este ejemplo vamos a modificar un componente diferente, haremos lo mismo que hicimos en el ejemplo anterior pero con `ExpenseForm`:
 
-#### DESARROLLO
+1. Renombrar `ExpenseForm.css` por `ExpenseForm.module.css`
+2. Importar `styles` de `./ExpenseForm.module.css`
+3. Reemplazar los strings de cada `className` por la propiedad de `styles` que le corresponda.
 
-1. Comenzar nuevo proyecto de React con el comando `npx create-react-app ejemplo2`.
+```jsx
+import { useState } from "react";
+import styles from "./ExpenseForm.module.css";
 
-2. Seguir las [buenas prácticas para empezar un proyecto](../../BuenasPracticas/EmpezandoProyectos/Readme.md).
+function ExpenseForm(props) {
+  const [title, setTitle] = useState("");
+  const [amount, setAmount] = useState("");
+  const [date, setDate] = useState("");
 
-3. Convertimos nuestra `App.js` en un componente stateful (clase) para usar el estado.
-```
-import React from 'react';
+  const titleChangeHandler = (event) => {
+    setTitle(event.target.value);
+  };
 
-class App extends React.Component {
-   render() {
-      return (
-         <div>
-            Hola Mundo!
-         </div>
-      );
-   }
-}
+  const amountChangeHandler = (event) => {
+    setAmount(event.target.value);
+  };
 
-export default App;
-```
+  const dateChangeHandler = (event) => {
+    setDate(event.target.value);
+  };
 
-4. Vamos a darle un margen a la aplicación para que no se vea en la mera esquina, creamos una clase CSS y se la ponemos a nuestro `div`.
-```
-.margen {
-   margin: 100px;
-}
-``` 
+  const submitHandler = (event) => {
+    event.preventDefault();
 
-5. Creamos los estados necesarios para este ejercicio.
-```
-import React from 'react';
+    const expense = {
+      title,
+      amount,
+      date: new Date(date),
+    };
 
-class App extends React.Component {
-   constructor(props) {
-      super(props);
-      this.state = {
-         nombre: '',
-         mensaje: '',
-         listaNombres: ['Bedu']
-      };
-   }
+    props.onSaveExpense(expense);
 
-   render() {
-      return (
-         <div className="margen">
-            Hola Mundo!
-         </div>
-      );
-   }
-}
+    setTitle("");
+    setAmount("");
+    setDate("");
+  };
 
-export default App;
-``` 
-
-6. Creamos un `<input />` y nos aseguramos que podamos escribir en él.
-```
-import React from 'react';
-
-class App extends React.Component {
-   constructor(props) {
-      super(props);
-      this.state = {
-         nombre: '',
-         mensaje: '',
-         listaNombres: ['Bedu']
-      };
-   }
-
-   render() {
-      return (
-         <div className="margen">
-            <input />
-         </div>
-      );
-   }
-}
-
-export default App;
-```
-
-7. Este va a ser el lugar en donde escribiremos el nombre para agregarlo a la lista de nombre. Para poder hacer eso necesitamos tener registro de lo que los usuarios estan escribiendo en el campo de texto.
-
-8. Vamos a registrarlo con el estado de `nombre`.
-```
-<input value={this.state.nombre} />
-```
-
-9. Ahora nuestro `<input />` ya no funciona, esto es porque el valor siempre es un string vacio; ahora tenemos que cambiar el estado cada que el usuario escriba algo.
-```
-import React from 'react';
-
-class App extends React.Component {
-   constructor(props) {
-      super(props);
-      this.state = {
-         nombre: '',
-         mensaje: '',
-         listaNombres: ['Bedu']
-      };
-   };
-
-   handleInputChange = (event) => {
-      this.setState({
-         nombre: event.target.value
-      });
-   };
-
-   render() {
-      return (
-         <div className="margen">
-            <input
-               value={this.state.nombre}
-               onChange={this.handleInputChange}
-            />
-         </div>
-      );
-   }
-}
-
-export default App;
-```
-
-10. Nuestro campo de texto vuelve a funcionar.
-
-11. Ahora vamos a desplegar los nombres que tenemos en nuestra lista usando la función de javascript `.map()`.
-```
-render() {
-   return (
-      <div className="margen">
-         <input
-            value={this.state.nombre}
-            onChange={this.handleInputChange}
-         />
-
-         <ul>
-            {this.state.listaNombres.map((nmbr) => (
-               <li>
-                  {nmbr}
-               </li>
-            ))}
-         </ul>
+  return (
+    <form onSubmit={submitHandler}>
+      <div className={styles["new-expense-controls"]}>
+        <div className={styles["new-expense-control"]}>
+          <label>Descripción</label>
+          <input type="text" value={title} onChange={titleChangeHandler} />
+        </div>
+        <div className={styles["new-expense-control"]}>
+          <label>Monto</label>
+          <input
+            type="number"
+            min="1"
+            step="1"
+            value={amount}
+            onChange={amountChangeHandler}
+          />
+        </div>
+        <div className={styles["new-expense-control"]}>
+          <label>Fecha</label>
+          <input
+            type="date"
+            min="2019-01-01"
+            max="2022-12-31"
+            value={date}
+            onChange={dateChangeHandler}
+          />
+        </div>
       </div>
-   );
-}
-```
-
-12. Si abrimos la consola del navegador, nos va a dar un mensaje diciendo `Each child in a list should have a unique "key" prop`. Para arreglarlo hacemos lo siguiente:
-```
-{this.state.listaNombres.map((nmbr, key) => (
-   <li key={key}>
-      {nmbr}
-   </li>
-))}
-```
-
-13. Ya que estamos imprimiendo los nombres, vamos a agregar más nombres con un botón.
-```
-import React from 'react';
-
-class App extends React.Component {
-   constructor(props) {
-      super(props);
-      this.state = {
-         nombre: '',
-         mensaje: '',
-         listaNombres: ['Bedu']
-      };
-   };
-
-   handleInputChange = (event) => {
-      this.setState({
-         nombre: event.target.value
-      });
-   };
-
-   handleClick = () => {
-      const nombreEnEstado = this.state.nombre;
-      if (!nombreEnEstado) return;
-
-      const listaActualizada = [
-         ...this.state.listaNombres,
-         nombreEnEstado
-      ];
-
-      this.setState({
-         nombre: '',
-         listaNombres: listaActualizada,
-      });
-   };
-
-   render() {
-      return (
-         <div className="margen">
-            <input
-               value={this.state.nombre}
-               onChange={this.handleInputChange}
-            />
-            <button onClick={this.handleClick}>
-               Agregar
-            </button>
-
-            <ul>
-               {this.state.listaNombres.map((nmbr, key) => (
-                  <li key={key}>
-                     {nmbr}
-                  </li>
-               ))}
-            </ul>
-         </div>
-      );
-   }
-}
-
-export default App;
-```
-
-14. Nuestra función `handleClick()` se divide en 3 partes:
-   - Validar si el nombre existe (que no este vacio).
-   - Añadir el nombre a la lista de nombres.
-   - Actualizar el estado (añadir nombre a la lista y limpiar el nombre).
-
-15. Ahora podemos agregar nombres escribiendo en el campo de texto y picandole al botón.
-
-16. Vamos a crear un nuevo componente llamado `Nombre.js` que reciba el parámetro de `nombre`; no olvides seguir las [buenas prácticas para las propiedades (props)](../../BuenasPracticas/PropTypes/Readme.md).
-```
-import React from 'react';
-import PropTypes from 'prop-types';
-
-const Nombre = (props) => {
-   return (
-      <div>
-         {props.nombre}
+      <div className={styles["new-expense-actions"]}>
+        <button type="submit">Agregar</button>
       </div>
-   );
-};
-
-Nombre.propTypes = {
-   nombre: PropTypes.string.isRequired
+    </form>
+  );
 }
 
-export default Nombre;
+export default ExpenseForm;
 ```
 
-17. Lo importamos y lo usamos en `App.js`.
-```
-import Nombre from './Nombre';
-...
-{this.state.listaNombres.map((nmbr, key) => (
-   <li key={key}>
-      <Nombre nombre={nmbr} />
-   </li>
-))}
-...
-```
+Ahora en `ExpenseForm.module.css` agregamos los siguientes estilos:
 
-18. Como vamos a usar el ciclo de vida en `Nombre.js`, necesitamos convertirlo en componente stateful (clase).
-```
-import React from 'react';
-import PropTypes from 'prop-types';
-
-class Nombre extends React.Component {
-   render() {
-      return (
-         <div>
-            {this.props.nombre}
-         </div>
-      );
-   }
-};
-
-Nombre.propTypes = {
-   nombre: PropTypes.string.isRequired
+```css
+.new-expense-control.invalid input {
+  border-color: #ad0000;
 }
 
-export default Nombre;
-```
-
-19. Vamos a agregarle el ciclo de vida más común, `componentDidMount` (cuando se inicializa).
-```
-import React from 'react';
-import PropTypes from 'prop-types';
-
-class Nombre extends React.Component {
-   componentDidMount() {
-      alert('Te damos la bienvenida ' + this.props.nombre);
-   }
-
-   render() {
-      return (
-         <div>
-            {this.props.nombre}
-         </div>
-      );
-   }
-};
-
-Nombre.propTypes = {
-   nombre: PropTypes.string.isRequired
+.new-expense-control.invalid label {
+  color: #ad0000;
 }
-
-export default Nombre;
 ```
 
-20. Si nos fijamos bien, cada que un nombre es agregado a la lista, una alerta nos aparece dándole la bienvenida a la lista. Lo que `componentDidMount` hace, es que ejecuta esa función cuando el componente se montó en el virtual DOM y esta listo para ser desplegado en pantalla. Se ejecuta una vez el componente este correcto y listo para verse.
+Volvamos a `ExpenseForm`, necesitamos una nueva variable de estado que usaremos para determinar si un input del formulario es válido o no:
 
-21. Para poder ver el siguiente ciclo de vida, agreguemos un botón para eliminar nombres.
+```jsx
+const [isValid, setIsValid] = useState(true);
 ```
-render() {
-   return (
-      <div>
-         {this.props.nombre}
-         <button>
-            X
-         </button>
+
+Nuestro estado inicial es `true`. Este va a cambiar a `false` si el input de descripción se encuentra vacío, esta validación la podemos hacer en `submitHandler`:
+
+```jsx
+const submitHandler = (event) => {
+  event.preventDefault();
+
+  if (title.trim().length === 0) {
+    setIsValid(false);
+    return;
+  }
+
+  const expense = {
+    title,
+    amount,
+    date: new Date(date),
+  };
+
+  props.onSaveExpense(expense);
+
+  setTitle("");
+  setAmount("");
+  setDate("");
+};
+```
+
+> El método `trim()` elimina los espacios en blanco de ambos lados de un string.
+
+El `if` que acabamos de colocar está evaluando la longitud de `title`, si recibimos un string vacío, es decir, que el usuario no ha ingresado nada o ha ingresado espacios en blanco, cambiamos `isValid` a `false` y nos salimos de la función para evitar que se agregue el gasto a la lista. Sólo nos falta usar la nueva clase que hicimos:
+
+```jsx
+<div
+  className={`${styles["new-expense-control"]} ${!isValid && styles.invalid}`}
+>
+  <label>Descripción</label>
+  <input type="text" value={title} onChange={titleChangeHandler} />
+</div>
+```
+
+Cambiamos a un template string para que podamos usar una expresión de JavaScript, la primera parte es lo que ya teníamos, la clase `new-expense-control`, la segunda parte usa el operador lógico `&&`, evalúa que `isValid` sea `false` y si se cumple esa condición agregamos la clase `invalid`.
+
+![Dynamic Style](./assets/dynamic-style.gif)
+
+Revisa el código completo de este componente:
+
+```jsx
+import { useState } from "react";
+import styles from "./ExpenseForm.module.css";
+
+function ExpenseForm(props) {
+  const [title, setTitle] = useState("");
+  const [amount, setAmount] = useState("");
+  const [date, setDate] = useState("");
+  const [isValid, setIsValid] = useState(true);
+
+  const titleChangeHandler = (event) => {
+    setTitle(event.target.value);
+  };
+
+  const amountChangeHandler = (event) => {
+    setAmount(event.target.value);
+  };
+
+  const dateChangeHandler = (event) => {
+    setDate(event.target.value);
+  };
+
+  const submitHandler = (event) => {
+    event.preventDefault();
+
+    if (title.trim().length === 0) {
+      setIsValid(false);
+      return;
+    }
+
+    const expense = {
+      title,
+      amount,
+      date: new Date(date),
+    };
+
+    props.onSaveExpense(expense);
+
+    setTitle("");
+    setAmount("");
+    setDate("");
+  };
+
+  return (
+    <form onSubmit={submitHandler}>
+      <div className={styles["new-expense-controls"]}>
+        <div
+          className={`${styles["new-expense-control"]} ${
+            !isValid && styles.invalid
+          }`}
+        >
+          <label>Descripción</label>
+          <input type="text" value={title} onChange={titleChangeHandler} />
+        </div>
+        <div className={styles["new-expense-control"]}>
+          <label>Monto</label>
+          <input
+            type="number"
+            min="1"
+            step="1"
+            value={amount}
+            onChange={amountChangeHandler}
+          />
+        </div>
+        <div className={styles["new-expense-control"]}>
+          <label>Fecha</label>
+          <input
+            type="date"
+            min="2019-01-01"
+            max="2022-12-31"
+            value={date}
+            onChange={dateChangeHandler}
+          />
+        </div>
       </div>
-   );
-}
-```
-
-22. Hacemos la lógica para eliminar ese nombre de la lista y se lo pasamos a `Nombre.js`. Es MUUUUUUY importante NO modificar la lista directamente, esto causa mutación de datos y es algo que siempre se debe de evitar.
-```
-...
-borrarNombreDeLista = (key) => {
-   const copiaDeLista = [...this.state.listaNombres];
-   copiaDeLista.splice(key, 1);
-
-   this.setState({
-      listaNombres: copiaDeLista
-   });
-};
-...
-{this.state.listaNombres.map((nmbr, key) => (
-   <li key={key}>
-      <Nombre
-         nombre={nmbr}
-         borrarNombreDeLista={() => this.borrarNombreDeLista(key)}
-      />
-   </li>
-))}
-...
-```
-
-23. Ahora podemos agregar el siguiente ciclo de vida `componentWillUnmount` (cuando el componente se remueve).
-```
-import React from 'react';
-import PropTypes from 'prop-types';
-
-class Nombre extends React.Component {
-   componentDidMount() {
-      alert('Te damos la bienvenida ' + this.props.nombre);
-   }
-
-   componentWillUnmount() {
-      alert('Adiós');
-   }
-
-   render() {
-      return (
-         <div>
-            {this.props.nombre}
-            <button onClick={this.props.borrarNombreDeLista}>
-               X
-            </button>
-         </div>
-      );
-   }
-};
-
-Nombre.propTypes = {
-   nombre: PropTypes.string.isRequired,
-   borrarNombreDeLista: PropTypes.func.isRequired
-}
-
-export default Nombre;
-```
-
-24. Si nos fijamos bien, cada que un nombre es eliminado de la lista, una alerta nos despide. Lo que `componentWillUnmount` hace, es que ejecuta esa función cuando el componente se removió en el virtual DOM y esta listo para ser eliminado de la pantalla.
-
-25. El siguiente ciclo de vida se ejecuta cada que algún estado cambia, el `componentDidUpdate`. Se lo agregamos a `App.js` debajo del constructor.
-```
-...
-constructor(props) {
-   super(props);
-   this.state = {
-      nombre: '',
-      mensaje: '',
-      listaNombres: ['Bedu']
-   };
-};
-
-componentDidUpdate(prevProps, prevState) {
-   if (this.state.listaNombres !== prevState.listaNombres) {
-      this.setState({
-         mensaje: `Longitud de la lista es: ${this.state.listaNombres.length}`
-      })
-   }
-};
-...
-```
-
-26. Agregamos el mensaje arriba del campo de texto y terminamos.
-```
-...
-render() {
-   return (
-      <div className="margen">
-         {this.state.mensaje}
-         <br />
-         <input
-            value={this.state.nombre}
-            onChange={this.handleInputChange}
-         />
-         <button onClick={this.handleClick}>
-            Agregar
-         </button>
-
-         <ul>
-            {this.state.listaNombres.map((nmbr, key) => (
-               <li key={key}>
-                  <Nombre
-                     nombre={nmbr}
-                     borrarNombreDeLista={() => this.borrarNombreDeLista(key)}
-                  />
-               </li>
-            ))}
-         </ul>
+      <div className={styles["new-expense-actions"]}>
+        <button type="submit">Agregar</button>
       </div>
-   );
+    </form>
+  );
 }
-...
+
+export default ExpenseForm;
 ```
-
-27. Resultado:
-<img src="./public/resultado.gif">
-
--------
-
-[`Siguiente: Reto-01`](../Reto-01)

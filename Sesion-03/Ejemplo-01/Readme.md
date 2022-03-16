@@ -1,200 +1,45 @@
-[`React Fundamentals`](../../README.md) > [`Sesión 03: Estado (state) y Propiedades (props)`](../Readme.md) > `Ejemplo 1`
+[`React`](../../README.md) > [`Sesión 03: Trabajando con estilos`](../Readme.md) > `Ejemplo 01: Módulos de CSS`
 
-## Incremento
+---
 
-### OBJETIVO
-- Modificar el estado.
-- Modificar estado del padre por medio de funciones mandadas como props.
+## Ejemplo 01: Módulos de CSS
 
-#### REQUISITOS 
-- Tener Node instalado.
+Empecemos con un componente pequeño, vamos a usar módulos de CSS en `ExpenseDate` y para ello debemos cambiar el nombre del CSS de `ExpanseDate.css` a `ExpenseDate.module.css`. Tambien debemos cambar la forma en la que estamos importando este archivo:
 
-#### DESARROLLO
-
-1. Comenzar nuevo proyecto de React con el comando `npx create-react-app ejemplo1`.
-
-2. Seguir las [buenas prácticas para empezar un proyecto](../../BuenasPracticas/EmpezandoProyectos/Readme.md).
-
-3. Convertimos nuestra `App.js` en un componente stateful (clase) para usar el estado.
+```jsx
+import styles from "./ExpenseDate.module.css";
 ```
-import React from 'react';
 
-class App extends React.Component {
-   render() {
-      return (
-         <div>
-            Hola Mundo!
-         </div>
-      );
-   }
+Esto nos crea un objeto `styles` cuyas propiedades corresponden a cada una de las clases que tenemos en nuestro CSS.
+
+![Log Styles](./assets/log-styles.png)
+
+Aquí vemos que la propiedad es el nombre de la clase, y el valor es la misma clase pero incluye información que no agregamos nosotros como el nombre del componente y un hash al final. Para usar estas nuevas clases sólo hay que cambiar la propiedad `className`:
+
+```jsx
+import styles from "./ExpenseDate.module.css";
+
+function ExpenseDate(props) {
+  const month = props.date.toLocaleString("es-MX", { month: "long" });
+  const day = props.date.toLocaleString("es-MX", { day: "2-digit" });
+  const year = props.date.getFullYear();
+
+  return (
+    <div className={styles["expense-date"]}>
+      <div className={styles["expense-date-month"]}>{month}</div>
+      <div className={styles["expense-date-year"]}>{year}</div>
+      <div className={styles["expense-date-day"]}>{day}</div>
+    </div>
+  );
 }
 
-export default App;
+export default ExpenseDate;
 ```
 
-4. Vamos a darle un margen a la aplicación para que no se vea en la mera esquina, creamos una clase CSS y se la ponemos a nuestro `div`.
-```
-.margen {
-   margin: 100px;
-}
-``` 
+> No tiene que ser `styles`, puedes obtar por darle otro nombre a la variable.
 
-5. Creamos un estado y lo imprimimos para ver que funcione bien.
-```
-import React from 'react';
+Estamos accediendo a las propiedades del objeto `styles` como si fuera un objeto porque nuestra clase de css está en kebab-case, pero si fuera una sola palabra podríamos usar `styles.expense`.
 
-class App extends React.Component {
-   constructor(props) {
-      super(props);
-      this.state = {
-         contador: 0
-      };
-   }
+![Expense Date CSS Modules](./assets/expense-date-css-modules.png)
 
-   render() {
-      return (
-         <div className="margen">
-            {this.state.contador}
-         </div>
-      );
-   }
-}
-
-export default App;
-``` 
-
-6. Creamos un botón y aseguramos que funcione bien.
-```
-import React from 'react';
-
-class App extends React.Component {
-   constructor(props) {
-      super(props);
-      this.state = {
-         contador: 0
-      };
-   }
-
-   handleClick = () => alert('pero despacito');
-
-   render() {
-      return (
-         <div className="margen">
-            {this.state.contador}
-
-            <button onClick={this.handleClick}>
-               Picame
-            </button>
-         </div>
-      );
-   }
-}
-
-export default App;
-```
-
-7. Si te fijas, estamos usando el evento `click` del navegador. Cuando queramos usar algún evento, tenemos que hacerlo agregando el sufijo `on` seguido del evento y escribirlo en [camel case](https://techterms.com/definition/camelcase).
-
-8. En nuestro caso estamos usando `click` y este se traduce a `onClick`. Si usáramos el `change`, sería `onChange`. Estos son todos los [eventos del navegador](https://www.w3schools.com/jsref/dom_obj_event.asp).
-
-9. Ahora vamos a cambiar el estado del contador cada vez que le demos click en el botón.
-```
-import React from 'react';
-
-class App extends React.Component {
-   constructor(props) {
-      super(props);
-      this.state = {
-         contador: 0
-      };
-   }
-
-   handleClick = () => {
-      this.setState({
-         contador: this.state.contador + 1
-      })
-   }
-
-   render() {
-      return (
-         <div className="margen">
-            {this.state.contador}
-
-            <button onClick={this.handleClick}>
-               Picame
-            </button>
-         </div>
-      );
-   }
-}
-
-export default App;
-```
-
-10. Ya logramos cambiar el estado. Si te fijas, `this.setState({})` recibe el nombre del atributo que queramos cambiar con el nuevo valor, que en nuestro caso es `contador: this.state.contador + 1` (lo que valga en ese momento + 1).
-
-11. Ahora vamos a hacer un nuevo componente `Boton.js` el cual va a recibir 2 propiedades (props), recuerda seguir las [buenas prácticas para propiedades](../../BuenasPracticas/PropTypes/Readme.md).
-```
-import React from 'react';
-import PropTypes from 'prop-types';
-
-const Boton = (props) => {
-   return (
-      <button onClick={props.handleClick}>
-         {props.texto}
-      </button>
-   );
-};
-
-Boton.propTypes = {
-   texto: PropTypes.string.isRequired,
-   handleClick: PropTypes.func.isRequired
-}
-
-export default Boton;
-```
-
-12. Importamos y vamos a pasarle al `Boton.js` lo que necesite.
-```
-import React from 'react';
-import Boton from './Boton';
-
-class App extends React.Component {
-   constructor(props) {
-      super(props);
-      this.state = {
-         contador: 0
-      };
-   }
-
-   handleClick = () => {
-      this.setState({
-         contador: this.state.contador + 1
-      })
-   }
-
-   render() {
-      return (
-         <div className="margen">
-            <Boton
-               texto={this.state.contador}
-               handleClick={this.handleClick}
-            />
-         </div>
-      );
-   }
-}
-
-export default App;
-```
-
-13. Fíjate como estamos mandando el estado de `App.js` y una función como propiedades. El `<Boton  />` lo único que hace es usar esas propiedades y ya.
-
-14. Cada que le demos click al `<Boton />`, el contador sumará 1.
-
-15. Resultado:
-<img src="./public/resultado.png" width="400">
-
--------
-
-[`Siguiente: Reto-01`](../Reto-01)
+El resultado final es el mismo con el que empezamos visualmente, pero internamente estamos garantizando que el nombre de las clases que estamos usando en este componente no se va a repetir en otro. Esto significa que podríamos usar `expense-date` en un componente distinto sin tener conflictos entre clases.

@@ -1,44 +1,27 @@
-# Sesión 03: Ciclo de vida, setState y eventos
+[`React`](../README.md) > `Sesión 03: Trabajando con estilos`
 
-🎯 **Objetivos:**
+---
 
-- Introducción de los **ciclos de vida:** **DidMount**, **WillUnmount**, **DidUpdate**.
-- Entender en que momento se ejecuta cada uno.
-- Como **modificar** el **estado**.
-- Ver todos los eventos disponibles: **change**, **click**, **hover**, etc.
-- Aprender a usar los eventos **onClick** y **onChange**.
-- Mandar funciones como **props**.
+# Sesión 03 - Trabajando con estilos
 
-### Secciones:
+## 🎯 Objetivos
 
-## 🛠 Prework
+- Diferenciar las distintas formas de estilizar componentes
+- Aplicar estilos de forma dinámica
+- Utilizar media queries para obtener un diseño responsivo
 
-**Objetivos:**
+## 🛠 Contenido
 
-- Conocer el Ciclo de vida de los componentes 
+### CSS Modules
 
-**Ciclo de vida de los componentes**
+Hasta ahora nos hemos enfocado más en la lógica de los componentes y no tanto en los estilos. Cuando importamos un archivo CSS directamente en un componente estamos colocando esos estilos disponibles para todos los componentes de nuestra aplicación, estamos acostumbrados a crear componentes pequeños e independientes por lo que esperaríamos que los estilos también sean únicos para cada componente.
 
-Se llama ciclo de vida al tiempo que pasa desde que un objeto se crea desde el código hasta que se elimina...[`leer mas`](Prework)
+![Inspect Styles](./assets/inspect-styles.png)
 
-## 🕵 Ejemplos:
+La desventaja de esto es que si usamos el mismo nombre para definir una clase en otro componente vamos a tener conflicto con los estilos. Una solución sería revisar todos los nombres de clases para asegurarnos que no hay duplicados, pero esto no es escalable, entre más crezca la aplicación más difícil será de mantener.
 
-+ [`Ejemplo 01: Incremento`](Ejemplo-01)
-+ [`Ejemplo 02: bienvenida`](Ejemplo-02)
+Una alternativa es usar módulos de CSS, como nuestra aplicación la instalamos con [Create React App](https://create-react-app.dev/docs/adding-a-css-modules-stylesheet) no necesitamos configurar nada, ya estamos listos para usar módulos de CSS en nuestros componentes.
 
-## 💻 Retos:
+- [`Ejemplo 01: Módulos de CSS`](./Ejemplo-01/Readme.md)
 
-+ [`Reto 01: Incremento y decremento`](Reto-01)
-+ [`Reto 02: Ciclos de vida viejos`](Reto-02)
-
-## 🛡 Postwork
-Completar el Reto-01 y Reto-02...[`leer más`](Postwork/)
-
-## ⚛ ORGANIZACION DE LA CLASE 
-- DidMount, WillUnmount, DidUpdate.
-- Eventos del navegador.
-- onClick y onChange.
-- Modificando el estado con this.setState.
-- utilizar un arreglo como estado.
-- Desplegando arreglos con componentes.
-- Mandar funciones como props.
+- [`Ejemplo 02: Estilos dinámicos con CSS Modules`](./Ejemplo-02/Readme.md)
