@@ -25,3 +25,15 @@ Una alternativa es usar módulos de CSS, como nuestra aplicación la instalamos 
 - [`Ejemplo 01: Módulos de CSS`](./Ejemplo-01/Readme.md)
 
 - [`Ejemplo 02: Estilos dinámicos con CSS Modules`](./Ejemplo-02/Readme.md)
+
+### Styled Components
+
+Otra alternativa para estilizar componentes es [Styled Components](https://styled-components.com/). Esta es una librería que nos permite crear componentes de React ya estilizados sin necesidad de crear archivos CSS. Es una combinación entre ES6 y CSS ya que los estilos se agregan dentro del componente usando _tagged template literals_.
+
+Como se trata de una librería primero debemos instalarla:
+
+```bash
+npm install --save styled-components
+```
+
+- [`Ejemplo 03: Styled Components`](./Ejemplo-03/Readme.md)
