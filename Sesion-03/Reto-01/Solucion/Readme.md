@@ -40,7 +40,7 @@ function ExpenseForm(props) {
     event.preventDefault();
 
     validateFields();
-    if (!(title && amount && date)) return;
+    if (!(isTitleValid && isAmountValid && isDateValid)) return;
 
     const expense = {
       title,
