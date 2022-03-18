@@ -37,3 +37,9 @@ npm install --save styled-components
 ```
 
 - [`Ejemplo 03: Styled Components`](./Ejemplo-03/Readme.md)
+
+- [`Ejemplo 04: Props y media queries`](./Ejemplo-04/Readme.md)
+
+> **Nota:** Para poder enfocarnos en la lógica y funcionalidad de React seguiremos usando CSS Modules en los ejemplos y retos, sin embargo, puedes continuar trabajando con Styled Components y explorar la [documentación](https://styled-components.com/docs) para descubrir todo lo que esta librería tiene que ofrecer.
+
+- [`Reto 01: Validaciones`](./Reto-01/Readme.md)
