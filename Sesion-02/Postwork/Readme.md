@@ -6,12 +6,12 @@
 
 ## 🎯 Objetivos
 
-- Manejar eventos de React
+- Manipular eventos de React
 - Utilizar el hook useState para manipular el estado
 
 ## 🛠 Desarrollo
 
-En la sesión anterior creaste la estructura inicial de `ReactMeals`, agregaste algunos estilos y renderizaste platillos del menú. Con lo visto en esta sesión estás listo para manejar eventos y manipular el state para agregar elementos al carrito de compra.
+En la sesión anterior creaste la estructura inicial de `ReactMeals`, agregaste algunos estilos y renderizaste platillos del menú. Con lo visto en esta sesión estás listo para manejar eventos y manipular el state para agregar elementos al carrito de compra. Sigue las siguientes instrucciones:
 
 - Crear un componente `Cart`. Por el momento sólo es necesario mostrar el número de elementos agregados al carrito, más adelante aprenderás lo necesario para mostrar el detalle del carrito en un modal.
 - Si aún no lo has hecho, agrega un botón de `Agregar` a cada platillo del menú junto con un input que permita al usuario cambiar la cantidad.

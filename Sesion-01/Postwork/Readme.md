@@ -11,7 +11,9 @@
 
 ## 🛠 Desarrollo
 
-A lo largo de cada postwork estaremos trabajando en una aplicación de React que irá integrando los conocimientos adquiridos en cada sesión. En los postworks haremos referencia a esta aplicación como ReactMeals, pero eres libre de escoger el nombre que desees. ReactMeals es una aplicación para ordenar comida de un restaurante, similar a como funciona UberEats.
+A lo largo de cada Postwork estaremos trabajando en una aplicación de React que irá integrando los conocimientos adquiridos en cada sesión. En los Postworks haremos referencia a esta aplicación como ReactMeals, pero eres libre de escoger el nombre que desees. ReactMeals es una aplicación para ordenar comida de un restaurante, similar a como funciona UberEats.
+
+Los pasos a seguir son:
 
 - Crear una nueva aplicación con Create React App.
 - Organizar el directorio como lo hicimos en el prework, hay que eliminar los archivos que no vamos a utilizar y corregir las referencias en los archivos.
@@ -21,4 +23,4 @@ A lo largo de cada postwork estaremos trabajando en una aplicación de React que
 - Guardar varios platillos en un arreglo de objetos y utilizar el método `map` para renderizar todos estos elementos.
 - Agregar estilos.
 
-Este postwork es mayormente de exploración e involucra ser creativo, así que tu aplicación no va a ser nada similar a la de tus compañeros. Sé tan creativo como quieras.
+Este Postwork es mayormente de exploración e involucra ser creativo, así que tu aplicación no va a ser nada similar a la de tus compañeros. Sé tan creativo como quieras.
