@@ -26,3 +26,5 @@ Aprovechemos para usar React Fragments y corregir este detalle.
 Los portales nos permiten renderizar elementos en un nodo del DOM que se encuentra afuera de la jerarquía del componente padre, un buen ejemplo de uso son los componentes que sobresalen visualmente de su contenedor, por ejemplo, alertas, cuadros de diálogo, tooltips, o hovercards.
 
 - [`Ejemplo 02: React portals`](./Ejemplo-02/Readme.md)
+
+- [`Reto 01: Error Modal`](./Reto-01/Readme.md)
