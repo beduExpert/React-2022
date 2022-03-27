@@ -1,24 +1,29 @@
-[`React Fundamentals`](../../README.md) > [`Sesión 02: Sesión 04: Hooks y useState`](../Readme.md) >[`Ejemplo-02`](../Ejemplo-02) > `Reto 2`
+[`React`](../../README.md) > [`Sesión 04: Fragments, Portals y Refs`](../Readme.md) > `Reto 02: Backdrop`
 
-## ¡Pero quiere otro!
+---
 
-### OBJETIVO
-- De componente stateful (clase) a hook.
+## Reto 02: Backdrop
 
-#### REQUISITOS
-- Haber completado el [Reto-01](../../Sesion-02/Reto-01) de la Sesion-02.
+1. Usar los siguientes estilos para generar el backdrop:
 
-#### DESARROLLO
+```css
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: 10;
+  background: rgba(0, 0, 0, 0.75);
+}
+```
 
-1. Abrir nuestro proyecto "Tía Socorro ganó" del [Reto-01](../../Sesion-02/Reto-01) de la Sesion-02.
+2. Crear un nuevo portal para el backdrop.
 
-2. Vamos a convertir nuestro componente `Mantel.js` de stateful (clase) a hooks.
+3. El backdrop debe mostrarse al mismo tiempo que el modal, si el usuario hace click en cualquier parte del backdrop el modal se debe cerrar.
 
-3. Resultado:
-<img src="./public/resultado.png" width="400">
+![Backdrop](./assets/backdrop.png)
 
-## ❗Importante
+---
 
-Si no pudiste resolver el reto, no te preocupes,😉 en la parte superior del repositorio encontrarás los archivos con la solución para tu consulta, pero recuerda lo importante es que **tú lo intentes primero.** 🤓
-
-[`Atrás`](https://github.com/beduExpert/C1-React-2020/tree/master/Sesion-04/Ejemplo-02)
+[Solución](./Solucion/Readme.md)

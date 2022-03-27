@@ -28,3 +28,5 @@ Los portales nos permiten renderizar elementos en un nodo del DOM que se encuent
 - [`Ejemplo 02: React portals`](./Ejemplo-02/Readme.md)
 
 - [`Reto 01: Error Modal`](./Reto-01/Readme.md)
+
+- [`Reto 02: Backdrop`](./Reto-02/Readme.md)
