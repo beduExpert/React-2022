@@ -1,230 +1,182 @@
-[`React Fundamentals`](../../README.md) > [`Sesión 04: Hooks y useState`](../Readme.md) > `Ejemplo 3`
+[`React`](../../README.md) > [`Sesión 04: Fragments, Portals y Refs`](../Readme.md) > `Ejemplo 03: useRef Hook`
 
-## Escuela
+---
 
-### OBJETIVO
-- Usando useState para creación y modificación de estado (state).
+## Ejemplo 03: useRef Hook
 
-#### REQUISITOS 
-- Tener Node instalado.
+Vamos a usar el hook `useRef` para crear una referencia al input del título. Actualmente si intentamos agregar un nuevo gasto todos los inputs que estén vacíos cambian a rojo, adicionalmente, aprovecharemos el nuevo ref para enfocar el input del título.
 
-#### DESARROLLO
+Dentro de `ExpenseForm` lo primero es importar el hook:
 
-1. Comenzar nuevo proyecto de React con el comando `npx create-react-app ejemplo3`.
-
-2. Seguir las [buenas prácticas para empezar un proyecto](../../BuenasPracticas/EmpezandoProyectos/Readme.md).
-
-3. Vamos a darle un margen a la aplicación para que no se vea en la mera esquina, creamos una clase CSS y se la ponemos a nuestro `div`.
+```jsx
+import React, { useState, useRef } from "react";
 ```
-.margen {
-   margin: 100px;
+
+Ahora dentro del componente y antes de todas las variables de estado que tenemos vamos a crear un nuevo ref e inicializarlo con `null`:
+
+```jsx
+const titleRef = useRef(null);
+```
+
+Para _conectarlo_ con el input tenemos que agregar el atributo `ref` y pasarle `titleRef`:
+
+```jsx
+<input type="text" value={title} onChange={titleChangeHandler} ref={titleRef} />
+```
+
+Por último, dentro de nuestra condicional que revisa si el input se encuentra vacío llamaremos la función `focus()`:
+
+```jsx
+if (title.trim().length === 0) {
+  setIsTitleValid(false);
+  titleRef.current.focus();
 }
-``` 
-
-4. Vamos a aprender una forma nueva de usar el estado, será parecida a como la usabamos con los componentes stateful (clase).
-
-5. Creamos el estado `nombre` de la forma como conocemos.
-```
-import React from 'react';
-
-const App = () => {
-   const [nombre, setNombre] = React.useState('')
-
-   return (
-      <div className="margen">
-         Hola Mundo!
-      </div>
-   );
-};
-
-export default App;
-``` 
-
-6. Y ahora vamos a agregar otros estados en una sola declaración (recuerda que podemos tener tantos `React.useState` como queramos).
-```
-import React from 'react';
-
-const App = () => {
-   const [nombre, setNombre] = React.useState('')
-   const [state, setState] = React.useState({
-      profes: 0,
-      alumnos: 0
-   });
-
-   return (
-      <div className="margen">
-         Hola Mundo!
-      </div>
-   );
-};
-
-export default App;
 ```
 
-7. Si te fijas, estamos tratando el estado parecido como lo haciamos antes, llamandolo `state` y la función para editarlo se llama `setState`.
+Con esto, además de cambiar los estilos también se enfocará este input en caso de estar vacío.
 
-8. Vamos a crear un campo de texto para cada uno e imprimir el valor para los 3 estados que tenemos (nombre, profes y alumnos).
+![React Refs](./assets/react-refs.gif)
 
-9. Observa la diferencia de como usar el estado en las 2 maneras diferentes.
+Revisa el código completo de este componente con todos los cambios que llevamos hasta el momento:
+
+```jsx
+import React, { useState, useRef } from "react";
+import Button from "../UI/Button";
+import Modal from "../UI/Modal";
+import styles from "./ExpenseForm.module.css";
+
+function ExpenseForm(props) {
+  const titleRef = useRef(null);
+  const [title, setTitle] = useState("");
+  const [amount, setAmount] = useState("");
+  const [date, setDate] = useState("");
+  const [isTitleValid, setIsTitleValid] = useState(true);
+  const [isAmountValid, setIsAmountValid] = useState(true);
+  const [isDateValid, setIsDateValid] = useState(true);
+  const [error, setError] = useState(null);
+
+  const titleChangeHandler = (event) => {
+    const { value } = event.target;
+    if (value.length > 0) setIsTitleValid(true);
+    setTitle(value);
+  };
+
+  const amountChangeHandler = (event) => {
+    const { value } = event.target;
+    if (value.length > 0) setIsAmountValid(true);
+    setAmount(value);
+  };
+
+  const dateChangeHandler = (event) => {
+    const { value } = event.target;
+    if (value.length > 0) setIsDateValid(true);
+    if (new Date(value) > new Date()) {
+      setIsDateValid(false);
+      setError({
+        title: "Fecha inválida",
+        message: `La fecha no debe ser mayor a ${new Date().toLocaleDateString()}`,
+      });
+    }
+    setDate(value);
+  };
+
+  const submitHandler = (event) => {
+    event.preventDefault();
+
+    validateFields();
+    if (!(isTitleValid && isAmountValid && isDateValid)) return;
+
+    const expense = {
+      title,
+      amount,
+      date: new Date(date),
+    };
+
+    props.onSaveExpense(expense);
+
+    setTitle("");
+    setAmount("");
+    setDate("");
+  };
+
+  const validateFields = () => {
+    if (title.trim().length === 0) {
+      setIsTitleValid(false);
+      titleRef.current.focus();
+    }
+
+    if (amount.trim().length === 0) {
+      setIsAmountValid(false);
+    }
+
+    if (date.trim().length === 0) {
+      setIsDateValid(false);
+    }
+  };
+
+  const errorHandler = () => {
+    setError(null);
+  };
+
+  return (
+    <React.Fragment>
+      <form onSubmit={submitHandler}>
+        <div className={styles["new-expense-controls"]}>
+          <div
+            className={`${styles["new-expense-control"]} ${
+              !isTitleValid && styles.invalid
+            }`}
+          >
+            <label>Descripción</label>
+            <input
+              type="text"
+              value={title}
+              onChange={titleChangeHandler}
+              ref={titleRef}
+            />
+          </div>
+          <div
+            className={`${styles["new-expense-control"]} ${
+              !isAmountValid && styles.invalid
+            }`}
+          >
+            <label>Monto</label>
+            <input
+              type="number"
+              min="1"
+              step="1"
+              value={amount}
+              onChange={amountChangeHandler}
+            />
+          </div>
+          <div
+            className={`${styles["new-expense-control"]} ${
+              !isDateValid && styles.invalid
+            }`}
+          >
+            <label>Fecha</label>
+            <input
+              type="date"
+              min="2019-01-01"
+              value={date}
+              onChange={dateChangeHandler}
+            />
+          </div>
+        </div>
+        <div className={styles["new-expense-actions"]}>
+          <Button type="submit">Agregar</Button>
+        </div>
+      </form>
+      {error && (
+        <Modal
+          title={error.title}
+          message={error.message}
+          onConfirm={errorHandler}
+        />
+      )}
+    </React.Fragment>
+  );
+}
+
+export default ExpenseForm;
 ```
-import React from 'react';
-
-const App = () => {
-   const [nombre, setNombre] = React.useState('')
-   const [state, setState] = React.useState({
-      profes: 0,
-      alumnos: 0
-   });
-
-   return (
-      <div className="margen">
-         <input />
-         {nombre}
-         <br /><br />
-
-         <input type="number" />
-         {state.profes}
-         <br /><br />
-
-         <input type="number" />
-         {state.alumnos}
-         <br /><br />
-      </div>
-   );
-};
-
-export default App;
-```
-
-10. Vamos a crear la función para cambiar el estado del nombre.
-```
-import React from 'react';
-
-const App = () => {
-   const [nombre, setNombre] = React.useState('')
-   const [state, setState] = React.useState({
-      profes: 0,
-      alumnos: 0
-   });
-
-   const editarNombre = (event) => setNombre(event.target.value);
-
-   return (
-      <div className="margen">
-         <input onChange={editarNombre} />
-         {nombre}
-         <br /><br />
-
-         <input type="number" />
-         {state.profes}
-         <br /><br />
-
-         <input type="number" />
-         {state.alumnos}
-         <br /><br />
-      </div>
-   );
-};
-
-export default App;
-```
-
-11. Ahora vamos a crear una función ESPECÍFICA para cambiar solo a los profes.
-```
-import React from 'react';
-
-const App = () => {
-   const [nombre, setNombre] = React.useState('')
-   const [state, setState] = React.useState({
-      profes: 0,
-      alumnos: 0
-   });
-
-   const editarNombre = (event) => setNombre(event.target.value);
-   const editarProfes = (event) => setState({
-      ...state,
-      profes: event.target.value
-   });
-
-   return (
-      <div className="margen">
-         <input onChange={editarNombre} />
-         {nombre}
-         <br /><br />
-
-         <input type="number" onChange={editarProfes} />
-         {state.profes}
-         <br /><br />
-
-         <input type="number" />
-         {state.alumnos}
-         <br /><br />
-      </div>
-   );
-};
-
-export default App;
-```
-
-12. En este ejemplo tomamos la decisión de usar un `state` como un objeto contenedor de estados, y como solo guarda 2 valores podríamos crear una función para cada uno sin problema. Pero si nuestro `state` llegara a usar 100 valores, crearíamos 100 funciones? La respuesta es SI.
-
-13. No te creas, ni de chiste.
-
-14. Ahora vamos a crear una función GENÉRICA para cambiar nuestro `state` y la usamos con los alumnos.
-```
-import React from 'react';
-
-const App = () => {
-   const [nombre, setNombre] = React.useState('')
-   const [state, setState] = React.useState({
-      profes: 0,
-      alumnos: 0
-   });
-
-   const editarNombre = (event) => setNombre(event.target.value);
-   const editarProfes = (event) => setState({
-      ...state,
-      profes: event.target.value
-   });
-   const editarState = (atributo) => (event) => setState({
-      ...state,
-      [atributo]: event.target.value
-   });
-
-   return (
-      <div className="margen">
-         <input onChange={editarNombre} />
-         {nombre}
-         <br /><br />
-
-         <input type="number" onChange={editarProfes} />
-         {state.profes}
-         <br /><br />
-
-         <input type="number" onChange={editarState('alumnos')} />
-         {state.alumnos}
-         <br /><br />
-      </div>
-   );
-};
-
-export default App;
-```
-
-15. La función `editarState` no es sencilla, probablemente tengamos muchas dudas de cómo funciona. Aprovecha a esa persona hermosa y capáz que tienes como profe y preguntale lo que no entiendas.
-
-16. Como esta nueva función es genérica para cualquier atributo de `state`, significa que podemos cambiar nuestra forma de editar a los profes, vamos a hacerlo.
-```
-<input type="number" onChange={editarState('profes')} />
-{state.profes}
-<br /><br />
-```
-
-17. Vamos a dejar la función de `editarProfes` (aunque ya no se use) para recordar en el futuro que se puede hacer de otra manera.
-
-18. Resultado:
-<img src="./public/resultado.png" width="400">
-
--------
-
-[`Siguiente: Reto-03`](../Reto-03)

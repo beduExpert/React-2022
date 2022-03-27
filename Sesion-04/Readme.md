@@ -32,3 +32,9 @@ Los portales nos permiten renderizar elementos en un nodo del DOM que se encuent
 Para mejorar la experiencia del modal podemos agregar un backdrop. Esto es oscurecer un poco el fondo para resaltar visualmente el modal, otra característica es que agrega una opción más al usuario para cerrar el modal, además del botón `Aceptar` si el usuario hace click en cualquier otra parte fuera del modal este se cierra.
 
 - [`Reto 02: Backdrop`](./Reto-02/Readme.md)
+
+### React Refs
+
+Los Refs o referencias en React nos permiten acceder a los nodos del DOM. Es importante considerar que no es buena práctica manipular el DOM directamente, en su lugar, algunos ejemplos de buenos casos para los refs son controlar enfoques, selección de texto, reproducción de medios, o activar animaciones.
+
+- [`Ejemplo 03: useRef Hook`](./Ejemplo-03/Readme.md)
