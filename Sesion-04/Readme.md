@@ -29,4 +29,6 @@ Los portales nos permiten renderizar elementos en un nodo del DOM que se encuent
 
 - [`Reto 01: Error Modal`](./Reto-01/Readme.md)
 
+Para mejorar la experiencia del modal podemos agregar un backdrop. Esto es oscurecer un poco el fondo para resaltar visualmente el modal, otra característica es que agrega una opción más al usuario para cerrar el modal, además del botón `Aceptar` si el usuario hace click en cualquier otra parte fuera del modal este se cierra.
+
 - [`Reto 02: Backdrop`](./Reto-02/Readme.md)
