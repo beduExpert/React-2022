@@ -1,39 +1,28 @@
-## Sesión 04: Hooks y useState
+[`React`](../README.md) > `Sesión 04: Fragments, Portals y Refs`
 
-🎯 **Objetivos:**
+---
 
-- Introducción de los **hooks**.
-- Porqué **usarse** y **ventajas**.
-- De componente **stateful (clase) a hook**.
+# Sesión 04 - Fragments, Portals y Refs
 
-### Secciones:
+## 🎯 Objetivos
 
-## 🛠 Prework
+- Renderizar elementos en un nodo del DOM que se encuentra afuera de la jerarquía del componente padre
+- Obtener acceso a nodos del DOM o elementos de React creados en el método render
 
-**Objetivos:**
+## 🛠 Contenido
 
-- Saber que son los hooks
+### React Fragments
 
-**Hooks**
+Hasta ahora hemos sido cuidadosos al crear nuestros componentes y hemos tratado de no retornar un `<div>` para envolver más de un elemento. Sin embargo, en nuestro componente `App` tuvimos que envolver los componentes `<NewExpense>` y `<Expenses>` en un `<div>`.
 
-La palabra Hook se traduce como Gancho en español, y la razón de que esta nueva API tenga este nombre, es que como indica la documentación...[`leer mas`](Prework)
+![No Fragment](./assets/no-fragment.png)
 
-## 🕵 Ejemplos:
+Aprovechemos para usar React Fragments y corregir este detalle.
 
-+ [`Ejemplo 01: Incrementando de nuevo`](Ejemplo-01)
-+ [`Ejemplo 02: Patricio evoluciona`](Ejemplo-02)
-+ [`Ejemplo 03: Escuela`](Ejemplo-03)
+- [`Ejemplo 01: React Fragments`](./Ejemplo-01/Readme.md)
 
-## 💻 Retos:
+### React Portals
 
-+ [`Reto 01: 3 botones`](Reto-01)
-+ [`Reto 02: ¡Pero quiere otro!`](Reto-02)
-+ [`Reto 03: ¿Cómo te llamas?`](Reto-03)
+Los portales nos permiten renderizar elementos en un nodo del DOM que se encuentra afuera de la jerarquía del componente padre, un buen ejemplo de uso son los componentes que sobresalen visualmente de su contenedor, por ejemplo, alertas, cuadros de diálogo, tooltips, o hovercards.
 
-## 🛡 Postwork
-- Completar los ejemplo: 01, 02 y 03. 
-- Completar los retos: 01, 02 y 03...[`leer más`](Postwork/)
-
-## ⚛ ORGANIZACION DE LA CLASE
-- Convertir de **stateful (clase)** a usar **hooks**.
-- Usando **useState** para **creación** y **modificación** de **estado (state)**.
+- [`Ejemplo 02: React portals`](./Ejemplo-02/Readme.md)

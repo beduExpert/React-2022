@@ -1,157 +1,201 @@
-[`React Fundamentals`](../../README.md) > [`Sesión 04: Hooks y useState`](../Readme.md) > `Ejemplo 2`
+[`React`](../../README.md) > [`Sesión 04: Fragments, Portals y Refs`](../Readme.md) > `Ejemplo 02: React Portals`
 
-## Patricio evoluciona
+---
 
-### OBJETIVO
-- De componente stateful (clase) a hook.
+## Ejemplo 02: React Portals
 
-#### REQUISITOS
-- Haber completado el [Ejemplo-01](../../Sesion-02/Ejemplo-01) de la Sesion-02.
+En este ejemplo haremos un modal usando portales de React. Pero antes necesitamos crear un componente `Button` para evitar tener código duplicado. En la carpeta `src/UI` crea un archivo `Button.js` y `Button.module.css`:
 
-#### DESARROLLO
+**`Button.js`**:
 
-1. Abrir nuestro proyecto "Patricio" del [Ejemplo-01](../../Sesion-02/Ejemplo-01) de la Sesion-02.
+```jsx
+import styles from "./Button.module.css";
 
-2. Ya tenemos nuestros focos bien hermosos usando el estado de la manera vieja, vamos a convertir nuestros componentes de stateful (clase) a hooks.
+function Button(props) {
+  return (
+    <button
+      className={styles.button}
+      type={props.type || "button"}
+      onClick={props.onClick}
+    >
+      {props.children}
+    </button>
+  );
+}
 
-3. Abrimos nuestro archivo `Luz.js` y como primer paso tenemos que cambiar el tipo de componente a que sea stateless (componente funcional).
-
-4. Cambiamos la línea de declaración de esto: `class Luz extends React.Component {` a esto `const Luz = () => {`; no va a funcionar porque todavia no terminamos.
-```
-import React from 'react';
-import '../css/Luz.css';
-
-const Luz = () => {
-   constructor(props) {
-      super(props);
-      this.state = {
-         color: 'pink'
-      };
-   }
-
-   render() {
-      return (
-         <div style={{ backgroundColor: this.state.color }} className="luz">
-         </div>
-      );
-   }
-};
-
-export default Luz;
+export default Button;
 ```
 
-5. Ahora vamos a remover el `render()`, sacando el `return` y poniendolo como declaración directa `Luz`.
+**`Button.module.css`**:
+
+```css
+.button {
+  color: #fff;
+  background-color: #6c757d;
+  border-color: #6c757d;
+  border: 1px solid transparent;
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  border-radius: 0.25rem;
+}
+
+.button:hover {
+  color: #fff;
+  background-color: #5c636a;
+  border-color: #565e64;
+  cursor: pointer;
+}
+
+.button:focus {
+  color: #fff;
+  background-color: #5c636a;
+  border-color: #565e64;
+  box-shadow: 0 0 0 0.25rem rgb(130 138 145 / 50%);
+}
 ```
-import React from 'react';
-import '../css/Luz.css';
 
-const Luz = () => {
-   constructor(props) {
-      super(props);
-      this.state = {
-         color: 'pink'
-      };
-   }
+Ahora en `NewExpense.module.css` puedes eliminar todas las clases del botón y en `NewForm.js` puedes cambiar el botón por este nuevo componente.
 
-   return (
-      <div style={{ backgroundColor: this.state.color }} className="luz">
+Teniendo este botón reutilizable podemos crear el componente para el modal. En la carpeta `src/UI` crea los archivos `Modal.js` y `Modal.module.css`.
+
+**`Modal.js`**:
+
+```jsx
+import Card from "./Card";
+import Button from "./Button";
+import styles from "./Modal.module.css";
+
+function Modal(props) {
+  return (
+    <Card className={styles.modal}>
+      <header className={styles.header}>
+        <h2>{props.title}</h2>
+      </header>
+      <div className={styles.content}>
+        <p>{props.message}</p>
       </div>
-   );
+      <footer className={styles.actions}>
+        <Button onClick={props.onConfirm}>Aceptar</Button>
+      </footer>
+    </Card>
+  );
+}
+
+export default Modal;
+```
+
+**`Modal.module.css`**:
+
+```css
+.modal {
+  position: fixed;
+  top: 30vh;
+  left: 10%;
+  width: 80%;
+  z-index: 100;
+  overflow: hidden;
+  background-color: rgba(215, 215, 215, 1);
+}
+
+.header {
+  background: #afafaf;
+  padding: 0.5rem 1rem;
+}
+
+.header h2 {
+  margin: 0;
+  color: #000;
+}
+
+.content {
+  padding: 1rem;
+}
+
+.actions {
+  padding: 1rem;
+  display: flex;
+  justify-content: flex-end;
+}
+
+@media (min-width: 768px) {
+  .modal {
+    left: calc(50% - 20rem);
+    width: 40rem;
+  }
+}
+```
+
+Hemos creado un componente para un modal y es lo suficientemente flexible para usarlo en distintas circunstancias ya que podemos cambiar el título y el contenido de manera dinámica mediante props.
+
+En `ExpenseForm` vamos a crear una nueva variable de estado que se encargará de controlar cuándo se debe abrir el modal:
+
+```jsx
+const [isOpen, setIsOpen] = useState(true);
+```
+
+Por el momento lo vamos a inicializar en `true` para que salga el modal por defecto. También necesitamos una función _handler_ que cambie el valor de `isOpen`:
+
+```jsx
+const toggleModal = () => {
+  setIsOpen(!isOpen);
 };
-
-export default Luz;
-``` 
-
-6. Dejamos de usar el `constructor`, declaramos el color con `useState` y corregimos para NO usar `this.state.color`; nuestra aplicación vuelve a funcionar.
-```
-import React from 'react';
-import '../css/Luz.css';
-
-const Luz = () => {
-   const [color, setColor] = React.useState('pink');
-
-   return (
-      <div style={{ backgroundColor: color }} className="luz">
-      </div>
-   );
-};
-
-export default Luz;
 ```
 
-7. Acabamos de convertir el componente `Luz.js` exitosamente, ahora vamos a hacer lo mismo con el componente `LuzMercurial.js`.
+Finalmente vamos a envolver el formulario en un fragmento para que podamos colocar el modal al mismo nivel del formulario. Revisaremos primero que `isOpen` sea `true` para poder renderizar el modal:
 
-8. Cambiamos la línea de declaración de esto: `class LuzMercurial extends React.Component {` a esto `const LuzMercurial = () => {`; no va a funcionar porque todavía no terminamos.
-```
-import React from 'react';
-
-const LuzMercurial = () => {
-   constructor(props) {
-      super(props);
-      this.state = {
-         color: 'pink'
-      };
-   }
-
-   render() {
-      return (
-         <div
-            className="luzMercurial"
-            style={{ backgroundColor: this.state.color }}
-         />
-      );
-   }
-};
-
-export default LuzMercurial;
+```jsx
+{
+  isOpen && (
+    <Modal title="Modal" message="Hello World" onConfirm={toggleModal} />
+  );
+}
 ```
 
-9. Ahora vamos a remover el `render()`, sacando el `return` y poniendolo como declaración directa `LuzMercurial`.
-```
-import React from 'react';
+![Modal No Portal](./assets/react-portal-modal.png)
 
-const LuzMercurial = () => {
-   constructor(props) {
-      super(props);
-      this.state = {
-         color: 'pink'
-      };
-   }
+Con esto podemos ver el modal en cuanto inicia la aplicación. El único problema es que se está renderizando junto al formulario, lo correcto es que los elementos que sobresalen visualmente de su contenedor no formen parte de la jerarquía del nodo padre. Esto lo podemos corregir con un portal de React, primero debemos definir en dónde se va a renderizar el modal, agregaremos un nuevo `<div>` en `public/index.html`:
 
-   return (
-      <div
-         className="luzMercurial"
-         style={{ backgroundColor: this.state.color }}
-      />
-   );
-};
-
-export default LuzMercurial;
+```html
+<div id="modal-root"></div>
+<div id="root"></div>
 ```
 
-10. Dejamos de usar el `constructor`, declaramos el color con `useState` y corregimos para NO usar `this.state.color`.
+Para crear el portal usamos `ReactDOM.createPortal()`, el primer argumento es el componente y el segundo argumento el nodo donde se va a renderizar. Haremos los cambios en `Modal.js`:
+
+```jsx
+import ReactDOM from "react-dom";
+import Card from "./Card";
+import Button from "./Button";
+import styles from "./Modal.module.css";
+
+const ModalOverlay = (props) => (
+  <Card className={styles.modal}>
+    <header className={styles.header}>
+      <h2>{props.title}</h2>
+    </header>
+    <div className={styles.content}>
+      <p>{props.message}</p>
+    </div>
+    <footer className={styles.actions}>
+      <Button onClick={props.onConfirm}>Aceptar</Button>
+    </footer>
+  </Card>
+);
+
+function Modal(props) {
+  return ReactDOM.createPortal(
+    <ModalOverlay
+      title={props.title}
+      message={props.message}
+      onConfirm={props.onConfirm}
+    />,
+    document.getElementById("modal-root")
+  );
+}
+
+export default Modal;
 ```
-import React from 'react';
 
-const LuzMercurial = () => {
-   const [color, setColor] = React.useState('pink');
+Para que sea más fácil de leer extraemos el componente `Modal` en la variable `ModalOverlay` y lo pasamos como primer argumento a `ReactDOM.createPortal()`. Con este cambio, el modal se renderiza fuera de la aplicación pese a que el componente lo usamos en `ExpenseForm`.
 
-   return (
-      <div
-         className="luzMercurial"
-         style={{ backgroundColor: color }}
-      />
-   );
-};
-
-export default LuzMercurial;
-```
-
-11. Ahora ya sabemos como convertir de stateful (clase) a hooks.
-
-12. Resultado
-<img src="./public/resultado.png" width="400">
-
--------
-
-[`Siguiente: Reto-02`](../Reto-02)
+![Modal Portal](./assets/react-portal-modal-2.png)
