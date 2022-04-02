@@ -33,3 +33,11 @@ El hook `useReducer` nos ayuda a manejar el state por lo que es similar al hook 
 - [`Ejemplo 03: useReducer Hook`](./Ejemplo-03/Readme.md)
 
 - [`Reto 02: useReducer Hook`](./Reto-02/Readme.md)
+
+### useContext Hook
+
+Context provee una forma de pasar datos a través del árbol de componentes sin tener que pasar `props` manualmente en cada nivel. Un ejemplo es `isLoggedIn` y `logoutHandler` que tenemos en `App`, los pasamos mediante `props` al componente `Header` pero este componene no los utiliza, solo los recibe para pasarlos nuevamente al componente `Navigation`. Con context podemos saltarnos `Header` y acceder a lo que necesitamos directamente en `Navigation`.
+
+- [`Ejemplo 04: useContext Hook`](./Ejemplo-04/Readme.md)
+
+Si lo necesitas puedes revisar el código final de la aplicación que trabajamos en esta sesión: [Proyecto Terminado](./Proyecto-Terminado/)
