@@ -1,24 +1,17 @@
-[`React Fundamentals`](../../README.md) > [`Sesión 05: Hooks y useEffect`](../Readme.md) >[`Ejemplo-01`](../Ejemplo-01) > `Reto 1`
+[`React`](../../README.md) > [`Sesión 05: Efectos Secundarios, Reducers y Context`](../Readme.md) > `Reto 01: useEffect con dependencias`
 
-## Extraño la tarea
+---
 
-### OBJETIVO
-- Convertir los 3 ciclos de vida a hooks.
+## Reto 01: useEffect con dependencias
 
-#### REQUISITOS
-- Haber completado el [Reto-02](../../Sesion-03/Reto-02) de la Sesion-03.
+El formulario cuenta con un par de validaciones que se encuentran en el componente `Login`, el correo debe contener `@` y la contraseña debe ser mayor a 6 caracteres. Si revisas a detalle el componente te darás cuenta `emailChangeHandler` y `passwordChangeHandler` usan la misma lógica para llamar `setFormIsValid` pero en orden opuesto.
 
-#### DESARROLLO
+1. Eliminar `setFormIsValid` de ambos handlers.
 
-1. Abrir nuestro proyecto "Ciclos de vida viejos" del [Reto-02](../../Sesion-03/Reto-02) de la Sesion-03.
+2. Realizar las mismas validaciones utilizando el hook `useEffect`.
 
-2. Convierte todo `App.js` en componente stateless (función), usa los hooks necesarios y hazlo funcionar.
+3. Recuerda definir las dependencias para que React ejecute la función de `useEffect` en cuanto dichas dependencias cambien.
 
-3. Resultado
-<img src="./public/resultado.gif">
+---
 
-## ❗Importante
-
-Si no pudiste resolver el reto, no te preocupes,😉 en la parte superior del repositorio encontrarás los archivos con la solución para tu consulta, pero recuerda lo importante es que **tú lo intentes primero.** 🤓
-
-[`Atrás`](https://github.com/beduExpert/C1-React-2020/tree/master/Sesion-05/Ejemplo-01)
+[Solución](./Solucion/Readme.md)
