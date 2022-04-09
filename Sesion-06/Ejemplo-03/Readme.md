@@ -150,7 +150,7 @@ Ahora podemos mostrar al usuario mensajes distintos dependiendo del estado de nu
 
 ![Error Handling](./assets/error-handling.png)
 
-Este es el código final de la aplicación:
+Este es el código final del componente `Home`:
 
 ```jsx
 import React, { useEffect, useState } from "react";

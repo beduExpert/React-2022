@@ -29,3 +29,11 @@ Ya vimos cómo hacer una petición HTTP usando `fetch` y un _event handler_. En 
 - [`Ejemplo 02: useEffect y fetch`](./Ejemplo-02/Readme.md)
 
 - [`Ejemplo 03: Manejo de errores y del estado de carga`](./Ejemplo-03/Readme.md)
+
+### Custom Hooks
+
+Hasta ahora hemos usado distintos hooks que ya vienen con React, además de estos hooks React nos permite crear nuestros propios hooks con la lógica que necesitemos.
+
+- [`Ejemplo 04: Custom HTTP hook`](./Ejemplo-04/Readme.md)
+
+- [`Reto 02: Usando custom hooks`](./Reto-02/Readme.md)
