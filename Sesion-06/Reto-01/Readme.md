@@ -1,36 +1,21 @@
-[`React Fundamentals`](../../README.md) > [`Sesión 06: Rutas con react router dom`](../Readme.md) >[`Ejemplo-01`](../Ejemplo-01) > `Reto 1`
+[`React`](../../README.md) > [`Sesión 06: Peticiones HTTP y Custom Hook`](../Readme.md) > `Reto 01: Peticiones HTTP`
 
-## Palmera
+---
 
-### OBJETIVO
-- react router dom.
-- Componente anchor (a).
-- Componente Link.
-- Exact path.
+## Reto 01: Peticiones HTTP
 
-#### REQUISITOS
-- Tener Node instalado.
+La aplicación funciona como la teníamos, la única diferencia es que puede tardar un poco más en cargar el mensaje de bienvenida, esta demora se debe al tiempo que tarda la petición HTTP en resolverse. Aún faltan detalles como validar que el correo sea válido y guardar el id del usuario para usarlo después.
 
-#### DESARROLLO
+1. Imprime en consola el mensaje `Correo inválido` si el usuario no existe.
 
-1. Comenzar nuevo proyecto de React con el comando `npx create-react-app reto1`.
+![Wrong email](./assets/fetch-wrong-email.png)
 
-2. Seguir las [buenas prácticas para empezar un proyecto](../../BuenasPracticas/EmpezandoProyectos/Readme.md).
+2. Si el usuario es correcto guarda en `localStorage` el id del usuario y continúa con el flujo normal de la aplicación.
 
-3. Instalar la librería `react-router-dom`.
+![LocalStorage](./assets/fetch-localstorage.png)
 
-4. Crea 5 rutas para manejar una palmera y SOLAMENTE 5 componentes.
-	- App
-	- Header
-	- Hojas
-	- Cocos
-	- Palmera
+3. Elimina `userId` del `localStorage` al cerrar la sesión.
 
-5. Resultado
-<img src="./public/resultado.gif">
+---
 
-## ❗Importante
-
-Si no pudiste resolver el reto, no te preocupes,😉 en la parte superior del repositorio encontrarás los archivos con la solución para tu consulta, pero recuerda lo importante es que **tú lo intentes primero.** 🤓
-
-[`Atrás`](https://github.com/beduExpert/C1-React-2020/tree/master/Sesion-06/Ejemplo-01)
+[Solución](./Solucion/Readme.md)

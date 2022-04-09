@@ -1,219 +1,146 @@
-[`React Fundamentals`](../../README.md) > [`Sesión 06: Rutas con react router dom`](../Readme.md) > `Ejemplo 1`
+[`React`](../../README.md) > [`Sesión 06: Peticiones HTTP y Custom Hooks`](../Readme.md) > `Ejemplo 01: Fetch con React`
 
-## Anatomía
+---
 
-### OBJETIVO
-- react router dom.
-- Componente anchor (a).
-- Componente Link.
-- Exact path.
+## Ejemplo 01: Fetch con React
 
-#### REQUISITOS 
-- Tener Node instalado.
+Vamos a continuar con nuestro formulario de autenticación de la sesión anterior. Ya que tenemos un usuario en la base de datos haremos una petición HTTP para obtener la información del usuario y simularemos un inicio de sesión.
 
-#### DESARROLLO
+> **Importante:** Lo que haremos en este ejemplo es para poder realizar peticiones HTTP con React y no representa un flujo de autenticación. En un escenario real debes tener en cuenta muchos otros factores como el encriptado de contraseñas y uso de tokens. Firebase también cuenta con servicio de autenticación que te permite empezar rápidamente ya que incluye procesos de verificación de correos y opciones para recuperar contraseñas, puedes consultar la documentación [aquí](https://firebase.google.com/docs/auth).
 
-1. Comenzar nuevo proyecto de React con el comando `npx create-react-app ejemplo1`.
+Como movimos la lógica de inicio de sesión y la pusimos en `AuthContext.js` aquí es donde haremos la petición HTTP. Primero vamos a crear una variable con la url que nos da Firebase.
 
-2. Seguir las [buenas prácticas para empezar un proyecto](../../BuenasPracticas/EmpezandoProyectos/Readme.md).
-
-3. Vamos a darle un margen a la aplicación para que no se vea en la mera esquina, creamos una clase CSS y se la ponemos a nuestro `div`.
+```jsx
+const BASE_URL = "https://react-http-bc6c7-default-rtdb.firebaseio.com/";
 ```
-.margen {
-   margin: 100px;
+
+> **Nota:** Es buena práctica usar [variables de entorno](https://create-react-app.dev/docs/adding-custom-environment-variables/) en lugar de poner el valor en el código.
+
+Ahora en la función `loginHandler` vamos comentar temporalmente el código que tenemos y agregaremos lo siguiente:
+
+```jsx
+const loginHandler = async (email) => {
+  const url = `${BASE_URL}users.json?orderBy="email"&equalTo="${email}"`;
+  const response = await fetch(url);
+  const responseData = await response.json();
+  console.log(responseData);
+  //localStorage.setItem("isLoggedIn", "1");
+  //setIsLoggedIn(true);
+};
+```
+
+Como estamos haciendo una operación asíncrona cambiamos la función para poder usar `async/await`. La variable `url` contiene la url que nos proporciona firebase seguido del recurso que deseamos consumir, en este caso es `users.json`. Los parámetros que le siguen nos permiten filtrar por el correo del usuario. Puedes consultar más información sobre los filtros en Firebase [aquí](https://firebase.google.com/docs/database/rest/retrieve-data?authuser=0#section-rest-filtering).
+
+Después de pasarle el `url` a `fetch()` este nos retorna una promesa que se resuelve en un objeto `Response`. Este objeto es una representación de la respuesta HTTP completa. Para extraer el contenido (body) de la respuesta usamos el método `json()`. Después de ingresar las credenciales y hacer click en `Login` podemos ver en consola los datos completos del usuario que tenemos en Firebase.
+
+![Fetch](./assets/fetch.png)
+
+Para tener más control sobre esta operación que estamos haciendo con `fetch` vamos a crear otra función que se encargue exclusivamente de hacer la petición HTTP.
+
+```jsx
+const fetchUser = async (email) => {
+  const url = `${BASE_URL}users.json?orderBy="email"&equalTo="${email}"`;
+  const response = await fetch(url);
+  return response.json();
+};
+
+const loginHandler = async (email) => {
+  const user = await fetchUser(email);
+  console.log(user);
+  //localStorage.setItem("isLoggedIn", "1");
+  //setIsLoggedIn(true);
+};
+```
+
+El resultado es el mismo pero ahora es más fácil manejar errores. Por ejemplo, si `fetch` no retorna una respuesta exitosa podemos lanzar un error y controlarlo en `loginHandler` con un `try/catch`.
+
+```jsx
+const fetchUser = async (email) => {
+  const url = `${BASE_URL}users.json?orderBy="email"&equalTo="${email}"`;
+  const response = await fetch(url);
+
+  if (!response.ok) throw new Error("Algo salió mal");
+
+  return response.json();
+};
+
+const loginHandler = async (email) => {
+  try {
+    const user = await fetchUser(email);
+    console.log(user);
+  } catch (error) {
+    console.log("Error:", error.message);
+  }
+  //localStorage.setItem("isLoggedIn", "1");
+  //setIsLoggedIn(true);
+};
+```
+
+Para simular un error cambia una letra de `BASE_URL`. Al momento de hacer la petición podemos ver nuestro mensaje de error en consola.
+
+![Fetch Error](./assets/fetch-error.png)
+
+Deja `BASE_URL` como estaba, elimina `console.log(user)`, descomenta el código y ponlo dentro del `try/catch`. La aplicación debería volver a funcionar como en un principio.
+
+```jsx
+import React, { useState, useEffect } from "react";
+
+const BASE_URL = "https://react-http-bc6c7-default-rtdb.firebaseio.com/";
+
+const AuthContext = React.createContext({
+  isLoggedIn: false,
+  onLogout: () => {},
+  onLogin: () => {},
+});
+
+export function AuthContextProvider(props) {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    const isAuthenticated = localStorage.getItem("isLoggedIn");
+
+    if (isAuthenticated === "1") {
+      setIsLoggedIn(true);
+    }
+  }, []);
+
+  const fetchUser = async (email) => {
+    const url = `${BASE_URL}users.json?orderBy="email"&equalTo="${email}"`;
+    const response = await fetch(url);
+
+    if (!response.ok) throw new Error("Algo salió mal");
+
+    return response.json();
+  };
+
+  const loginHandler = async (email) => {
+    try {
+      const user = await fetchUser(email);
+
+      localStorage.setItem("isLoggedIn", "1");
+      setIsLoggedIn(true);
+    } catch (error) {
+      console.log("Error:", error.message);
+    }
+  };
+
+  const logoutHandler = () => {
+    localStorage.removeItem("isLoggedIn");
+    setIsLoggedIn(false);
+  };
+
+  return (
+    <AuthContext.Provider
+      value={{
+        isLoggedIn,
+        onLogout: logoutHandler,
+        onLogin: loginHandler,
+      }}
+    >
+      {props.children}
+    </AuthContext.Provider>
+  );
 }
-``` 
 
-4. Ahora vamos a instalar una librería por primera vez. En la consola la instalamos con el comando `npm install react-router-dom` y cuando termine, la comenzamos con `npm start`.
-
-5. Importamos los componentes que vamos a necesitar de la librería.
+export default AuthContext;
 ```
-import { BrowserRouter, Route } from 'react-router-dom';
-``` 
-
-6. Como queremos que nuestra applicación completa tenga rutas, vamos a hacer que el enrutador `BrowserRouter` sea el padre de TODO.
-```
-import React from 'react';
-import { BrowserRouter, Route } from 'react-router-dom';
-
-const App = () => {
-   return (
-      <BrowserRouter>
-         <div className="margen">
-            Hola Mundo!
-         </div>
-      </BrowserRouter>
-   );
-};
-
-export default App;
-```
-
-7. Listo, ya hicimos que nuestra aplicación acepte rutas dinámicas. Ahora vamos a probarlas.
-
-8. Como el enrutador despliega componentes, vamos a crear 2 nuevos componentes  `Cabeza.js` y `Cuerpo.js`.
-```
-import React from 'react';
-
-const Cabeza = () => {
-   return (
-      <div>
-         Cabeza
-      </div>
-   );
-};
-
-export default Cabeza;
-```
-```
-import React from 'react';
-
-const Cuerpo = () => {
-   return (
-      <div>
-         Cuerpo
-      </div>
-   );
-};
-
-export default Cuerpo;
-```
-
-9. Ahora le vamos a decir al enrutador que cada que nuestra aplicación este en el url `/` que despliegue el componente `Cabeza.js` y cuando este en `/cuerpo` que despliegue el `Cuerpo.js`.
-```
-import React from 'react';
-import { BrowserRouter, Route } from 'react-router-dom';
-import Cabeza from './Cabeza';
-import Cuerpo from './Cuerpo';
-
-const App = () => {
-   return (
-      <BrowserRouter>
-         <div className="margen">
-            Hola Mundo!
-         </div>
-
-         <Route path="/" component={Cabeza} />
-         <Route path="/cuerpo" component={Cuerpo} />
-      </BrowserRouter>
-   );
-};
-
-export default App;
-```
-
-10. En este momento las rutas se estan haciendo de manera manual. Para poder ver el resultado hay que jugar con las rutas.
-   - Cabeza: [http://localhost:3000/](http://localhost:3000/)
-   - Cuerpo: [http://localhost:3000/cuerpo](http://localhost:3000/cuerpo)
-
-11. Ahora vamos a agregar un menú o header en donde manejemos nuestras rutas con enlaces. Creamos el componente `Header.js` y agregamos enlaces a las 2 rutas que manejamos en este momento.
-```
-import React from 'react';
-
-const Header = () => {
-   return (
-      <div>
-         <a href="/">
-            Cabeza
-         </a>
-         -
-         <a href="/cuerpo">
-            Cuerpo
-         </a>
-      </div>
-   );
-};
-
-export default Header;
-```
-
-12. Importamos en `App.js`, metemos todo dentro del margen y probamos.
-```
-import React from 'react';
-import { BrowserRouter, Route } from 'react-router-dom';
-import Header from './Header';
-import Cabeza from './Cabeza';
-import Cuerpo from './Cuerpo';
-
-const App = () => {
-   return (
-      <BrowserRouter>
-         <div className="margen">
-            <Header />
-
-            <Route path="/" component={Cabeza} />
-            <Route path="/cuerpo" component={Cuerpo} />
-         </div>
-      </BrowserRouter>
-   );
-};
-
-export default App;
-```
-
-13. Ahora nuestro `Header.js` es el encargado de llevarnos de una ruta a otra; PEEEERO, si te fijas bien, cada vez que estamos viajando de una ruta a otra, la página se recarga. Y esto esta extremadamente mal. Cuando lleguemos al modulo de `redux` te vas a dar cuenta del porqué.
-
-14. Esto esta pasando porque usamos el componente anchor `<a />`; pero como nuestro enrutador viene de `react-router-dom`, vamos a usar su componente de ruteo `Link`.
-
-15. Para pasar de `a` a `Link` seguimos 3 pasos:
-   - Importar de librería
-   - Cambiar todos los `<a />` por `<Link />`
-   - Cambiar `href` por `to`
-```
-import React from 'react';
-import { Link } from 'react-router-dom';
-
-const Header = () => {
-   return (
-      <div>
-         <Link to="/">
-            Cabeza
-         </Link>
-         -
-         <Link to="/cuerpo">
-            Cuerpo
-         </Link>
-      </div>
-   );
-};
-
-export default Header;
-```
-
-16. Vuelve a probar la app; mira, siente y disfruta la fluidez y dinamismo de viajar entre rutas.
-
-17. Pero ahora tenemos otro problema, el `Cuerpo.js` se enojó porque la `Cabeza.js` tiene su propia ruta y él no; y tiene razón.
-
-18. Vamos a hacer que las rutas sean específicas agregando el atributo de `exact`.
-```
-<Route exact path="/" component={Cabeza} />
-<Route exact path="/cuerpo" component={Cuerpo} />
-```
-
-19. Como lo dice el atributo, ahora el componente solo se desplegará cuando la ruta sea exactamente igual.
-
-20. Pero resulta que `Cuerpo.js` ahora extraña a `Cabeza.js`, pero también quiere conservar su espacio personal. Y como somos seres perfectos y piadosos, les vamos a dar su ruta compartida.
-
-21. Creamos un nuevo enlace en `Header.js`.
-```
-<Link to="/juntos">
-   Juntos
-</Link>
-```
-
-22. Y en `App.js` ahora vamos a desplegar 2 componentes en una misma ruta de una nueva manera.
-```
-<Route exact path="/" component={Cabeza} />
-<Route exact path="/cuerpo" component={Cuerpo} />
-<Route exact path="/juntos">
-   <Cabeza />
-   <Cuerpo />
-</Route>
-```
-
-23. Ya cada uno tiene su lugar y también aprendieron a compartir.
-
-24. Resultado:
-<img src="./public/resultado.gif">
-
-[`Siguiente: Reto-01`](../Reto-01)

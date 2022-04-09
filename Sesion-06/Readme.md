@@ -1,38 +1,31 @@
-## Sesión 06: Rutas con react router dom
+[`React`](../README.md) > `Sesión 06: Peticiones HTTP y Custom Hooks`
 
-🎯 **Objetivos:**
+---
 
-+ Implementar enrutamiento en react guardando y respetando el estado, sin que la página se actualice.
+# Sesión 06: Peticiones HTTP y Custom Hooks
 
-### Secciones:
+## 🎯 Objetivos
 
-## 🛠 Prework
+- Realizar peticiones HTTP con React y el hook useEffect
+- Manejar errores HTTP
+- Crear hooks personalizados
 
-**Objetivos:**
-+ Conocer que es react router dom.
+## 🛠 Contenido
 
-**¿Qué es React Router?**
+Antes de empezar asegúrate de contar con un proyecto de Firebase listo. Puedes consultar una guía rápida [aquí](./Firebase/Readme.md).
 
-Seguramente habrás escuchado sobre React Router y si no es así el día de hoy vas aprender a trabajar con esta librería la cual nos ayuda con el manejo de rutas en nuestra aplicación...[`leer mas`](Prework)
+### Peticiones HTTP
 
+Existen varias librerías que nos ayudan con las peticiones HTTP y que se acoplan muy bien con React. [Axios](https://axios-http.com/) es un ejemplo de una librería muy popular para realizar peticiones HTTP. Como no queremos enfocarnos en los detalles de otras librerías, en esta sesión trabajaremos con la [API Fetch](https://developer.mozilla.org/es/docs/Web/API/Fetch_API/Using_Fetch) nativa de JavaScript.
 
-## 🕵 Ejemplos:
+- [`Ejemplo 01: Fetch con React`](./Ejemplo-01/Readme.md)
 
-+ [`Ejemplo 01: Anatomía`](Ejemplo-01)
-+ [`Ejemplo 02: Plan de estudios`](Ejemplo-02)
+- [`Reto 01: Peticiones HTTP`](./Reto-01/Readme.md)
 
-## 💻 Retos:
+### `useEffect` para enviar peticiones HTTP
 
-+ [`Reto 01: Palmera`](Reto-01)
-+ [`Reto 02: Buscando a Memo`](Reto-02)
+Ya vimos cómo hacer una petición HTTP usando `fetch` y un _event handler_. En ocasiones necesitamos realizar una petición HTTP al momento de renderizar o cargar un componente, para esto podemos apoyarnos del hook `useEffect` que como sabes nos sirve para trabajar con efectos secundarios, recuerda que las peticiones HTTP se consideran efectos secundarios.
 
-## 🛡 Postwork
-+ Completar el Reto-01
-+ Completar el Reto-02...[`leer más`](Postwork/)
+- [`Ejemplo 02: useEffect y fetch`](./Ejemplo-02/Readme.md)
 
-## ⚛ ORGANIZACION DE LA CLASE
-- react router dom.
-- Componente anchor (a).
-- Componente Link.
-- Parámetros por url.
-- Exact path.
+- [`Ejemplo 03: Manejo de errores y del estado de carga`](./Ejemplo-03/Readme.md)
