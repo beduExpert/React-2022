@@ -1,73 +1,112 @@
-[`React Fundamentals`](../../README.md) > [`Sesión 07: Progressive web apps (PWA)`](../Readme.md) > `Ejemplo 1`
+[`React`](../../README.md) > [`Sesión 07: React Router`](../Readme.md) > `Ejemplo 01: Rutas`
 
-## ¡Wooow!
+---
 
-### OBJETIVO
-- Configurar la aplicación react para hacerla progressive web app.
-- Configurar un service worker.
+## Ejemplo 01: Rutas
 
-#### REQUISITOS 
-- Tener Node instalado.
+Una vez instalado React Router lo primero que debemos hacer es envolver toda nuestra aplicación en el componente `<BrowserRouter>`, así todos los componentes de nuestra aplicación tendrán acceso a React Router. Este cambio lo hacemos en `src/index.js`:
 
-#### DESARROLLO
+```jsx
+import ReactDOM from "react-dom";
+import { BrowserRouter } from "react-router-dom";
+import { AuthContextProvider } from "./context/AuthContext";
+import App from "./App";
+import "./index.css";
 
-1. Comenzar nuevo proyecto de React con el comando `npx create-react-app todo-pwa`.
+ReactDOM.render(
+  <BrowserRouter>
+    <AuthContextProvider>
+      <App />
+    </AuthContextProvider>
+  </BrowserRouter>,
+  document.getElementById("root")
+);
+```
 
-2. Seguir las instrucciones para [configurar una PWA](../../BuenasPracticas/PWA/Readme.md).
+Como en este ejemplo nos vamos a enfocar en definir, usar y cambiar rutas, vamos a ignorar temporalmente la lógica de autenticación que hicimos en las sesiones anteriores. Lo primero que haremos será crear un nuevo componente ya que usaremos tres rutas en total. En la carpeta `src/components` crea una nueva carpeta `Public` y dentro crea el archivo `Public.js`, agrega lo siguiente en ese archivo:
 
-3. Todas estas configuraciones nunca las vamos a ver en acción mientras estemos trabajando en desarrollo (`npm start` en `localhost:3000`). Solo van a poder ser visibles cuando la app este en producción (tenga su propio url).
+```jsx
+import Card from "../UI/Card/Card";
+import styles from "./Public.module.css";
 
-4. PEEEERO, hay una forma de simular el ambiente de producción en `localhost`.
+function Public() {
+  return (
+    <Card className={styles.public}>
+      <h1>Página Pública</h1>
+    </Card>
+  );
+}
 
-5. En la terminal escribimos `npm run build`. Este comando nos va a crear un folder en la carpeta raíz (`todo-pwa/build`) con los archivos preparados para producción.
+export default Public;
+```
 
-6. Escribimos `npx serve -s build`. Este comando va a simular ser producción con lo que nuestro folder `build` tenga en ese momento.
+Es un componente sencillo que sólo muestra el mensaje `Página Pública` pero lo necesitamos para ver los cambios de rutas. Finalmente agrega los siguientes estilos en `src/components/Public/Public.module.css`:
 
-7. Abre [localhost:5000](http://localhost:5000/) y verás la app corriendo como si fuera producción.
+```css
+.public {
+  width: 90%;
+  max-width: 40rem;
+  padding: 3rem;
+  margin: 2rem auto;
+  text-align: center;
+}
+```
 
-8. Para demostrar que el `service worker` esta activo y funcionando, abrimos la consola del navegador y vamos a la pestaña de `Application`. Ahí vamos a ver nuestro `service worker` registrado y corriendo.
-<img src="./img/1.png" width="500">
+Ahora bien, para definir rutas necesitamos usar los componentes `<Routes>` y `<Route>`, el primero solamente es para envolver los componentes que componen las rutas, el segundo es el que le dice a nuestra aplicación qué componente renderizar dependiendo de la ruta actual. Cambia el contenido de `App.js` por el siguiente:
 
-9. Como también configuramos que funcione sin internet, podemos simular esto en la consola de igual forma. Le damos click a `offline` en la consola del navegador y recargamos.
-<img src="./img/2.png" width="500">
+```jsx
+import React from "react";
+import { Routes, Route } from "react-router-dom";
+import Login from "./components/Login/Login";
+import Home from "./components/Home/Home";
+import Header from "./components/Header/Header";
+import Public from "./components/Public/Public";
 
-10. Si vamos a la consola, podemos ver que esta precargando lo que tiene en `cache` y hasta el último nos esta diciendo que esta en modo `offline`.
-<img src="./img/3.png" width="500">
+function App() {
+  return (
+    <React.Fragment>
+      <Header />
+      <main>
+        <Routes>
+          <Route path="/" element={<Public />} />
+          <Route path="/home" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+        </Routes>
+      </main>
+    </React.Fragment>
+  );
+}
 
-11. Regresa al paso 9 y quítale el modo `offline`.
+export default App;
+```
 
-12. Abre `App.js` y escribe tu nombre dentro del `<p />` debajo de la `<img />`. Guardalo y regresa a ver los cambios.
+Acabamos de definir tres rutas distintas mediante el componente `<Route>` y el prop `path`, a cada ruta le corresponde un componente a renderizar el cual se define en el prop `element`. Para poder cambiar las rutas necesitamos cambiar el contenido de `Navigation.js` por el siguiente:
 
-13. Si te fijas, los cambios no se ven reflejados en el navegador. Esto pasa porque lo que estamos viendo en [localhost:5000](http://localhost:5000/) es lo que la carpeta `build` tiene en ese momento. Entonces tenemos que volver a hacer los pasos 5 y 6 cada vez que queramos ver reflejado los nuevos cambios.
+```jsx
+import { Link } from "react-router-dom";
+import styles from "./Navigation.module.css";
 
-14. Repite los pasos 5 (`npm run build`) y 6 (`npx serve -s build`).
+function Navigation() {
+  return (
+    <nav className={styles.nav}>
+      <ul>
+        <li>
+          <Link to="/">Public</Link>
+        </li>
+        <li>
+          <Link to="/home">Home</Link>
+        </li>
+        <li>
+          <Link to="/login">Login</Link>
+        </li>
+      </ul>
+    </nav>
+  );
+}
 
-15. ¿Por qué no se esta actualizando y nos muestra la versión pasada? Porque como el `service worker` esta guardado en cache, esta mostrando la versión pasada. Incluso en la misma consola nos esta diciendo que tiene una nueva versión y que necesitamos recargar la página.
-<img src="./img/4.png" width="500">
+export default Navigation;
+```
 
-16. Para resolver esto, habilitamos la actualización al recargar.
-<img src="./img/5.png" width="500">
+Si utilizamos el elemento `<a>` como teníamos anteriormente ocasionamos que el navegador haga una redirección lo que hace que se vuelva a cargar nuestra aplicación. El componente `<Link>` de React Router hace que el navegador no realice dicha redirección y después cambia la url. Con todo esto tenemos tres rutas que cargan tres componentes diferentes.
 
-17. Y ahora la mejor parte de las PWA, instalación en todos los dispositivos.
-
-18. A simple vista, la manera de identificar si un sitio web es una PWA es ver si se puede instalar o no. Esto podemos verlo hasta el final del url. Si aparece un signo de `+` es porque es una PWA.
-<img src="./img/6.png" width="500">
-
-19. Instala la app y verás que ahora estará en la computadora como si fuera una aplicación de escritorio. Increible.
-
-20. Para desinstalarla sigue los siguientes pasos:
-<img src="./img/7.png" width="500">
-
-21. También se puede instalar en [Android](https://www.youtube.com/watch?v=kUsqZ9NYB2Y) y [IOS](https://www.youtube.com/watch?v=qtrRqzbXFtE).
-
-22. Ahora vamos a publicar nuestra app en internet con un proveedor gratis y de una manera muuuuuuy facil.
-
-23. Vamos a la página [Netlify](https://www.netlify.com/) y creamos una cuenta.
-
-24. Una vez adentro, agarramos y arrastramos nuestra carpeta `build` dentro del recuadro.
-<img src="./img/8.gif">
-
-25. Abre el url de la app y listo, ya tenemos nuestra React PWA en internet.
-<img src="./img/9.png" width="500">
-
-[`Siguiente: Reto-01`](../Reto-01)
+![Routes](./assets/routes.gif)
