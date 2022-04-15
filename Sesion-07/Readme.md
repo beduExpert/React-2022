@@ -59,4 +59,4 @@ Y podemos agregar varios parámetros separados por el símbolo `&`:
 
 - [`Ejemplo 04: Parámetros de consulta`](./Ejemplo-04/Readme.md)
 
-- [`Reto 02: Parámetros`](./Reto-01/Readme.md)
+- [`Reto 02: Parámetros`](./Reto-02/Readme.md)
