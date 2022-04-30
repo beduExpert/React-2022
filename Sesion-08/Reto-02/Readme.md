@@ -13,3 +13,7 @@ Para este reto pondrás en práctica tanto los mocks como las interacciones de u
 3. Construye el componente de tal forma que cumpla las características mencionadas y los tests sean válidos.
 
 ![Test 11](./assets/test-11.png)
+
+---
+
+[Solución](./Solucion/Readme.md)

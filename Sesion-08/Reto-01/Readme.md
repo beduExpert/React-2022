@@ -13,3 +13,7 @@ En la sesión anterior hicimos un mock de `fetch` para simular una petición HTT
 5. Cambia el código para que este test pueda pasar exitosamente.
 
 ![Test 10](./assets/test-10.png)
+
+---
+
+[Solución](./Solucion/Readme.md)
