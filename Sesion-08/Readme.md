@@ -51,3 +51,7 @@ Si hacemos un test de algún componente que está haciendo una llamada a una API
 Para evitar estos escenarios Jest cuenta con Funciones Mock. Los mocks capturan llamadas a funciones como `fetch` y evitan que se haga la petición HTTP, recuerda que debemos enfocarnos probar lo que sucede después de una peticicón HTTP y no la petición como tal.
 
 - [`Ejemplo 03: Mocks`](./Ejemplo-03/Readme.md)
+
+- [`Reto 01: Mock de errores`](./Reto-01/Readme.md)
+
+- [`Reto 02: Mock e interacciones`](./Reto-02/Readme.md)
