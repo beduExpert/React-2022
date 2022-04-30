@@ -1,345 +1,108 @@
-## Forma
+[`React`](../../README.md) > [`Sesión 08: Unit Testing en React`](../Readme.md) > `Ejemplo 02: Testing asíncrono`
 
-### OBJETIVO
-- Material UI
-- Grids
-- Formas
+---
 
-#### REQUISITOS 
-- Tener Node instalado.
+## Ejemplo 02: Testing asíncrono
 
-#### DESARROLLO
+Para este ejemplo usaremos la API [JSON Placeholder](https://jsonplaceholder.typicode.com/). Esta API es gratuita y perfecta para hacer pruebas o prototipos, contiene varios endpoints para obtener información de muestra, el que usaremos será `/posts`, el cual retorna un arreglo de publicaciones o posts con la siguiente estructura:
 
-1. Comenzar nuevo proyecto de React con el comando `npx create-react-app ejemplo2`.
-
-2. Seguir las [buenas prácticas para empezar un proyecto](../../BuenasPracticas/EmpezandoProyectos/Readme.md).
-
-3. Instalamos Material UI con `npm install @material-ui/core` y Material UI Icons con `npm install @material-ui/icons`; cuando terminen, la comenzamos con `npm start`.
-
-4. Creamos un componente nuevo llamado `Header.js`.
-
-5. Buscamos el componente de [`App Bar`](https://material-ui.com/components/app-bar) y copiamos el código del `Simple App Bar` dentro de `Header.js`. Despues de acomodar el código a nuestro estilo y de ordenarlo, nos debe de quedar así.
-```
-import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
-import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
-
-const useStyles = makeStyles((theme) => ({
-   root: {
-      flexGrow: 1,
-   },
-   menuButton: {
-      marginRight: theme.spacing(2),
-   },
-   title: {
-      flexGrow: 1,
-   },
-}));
-
-const Header = () => {
-   const classes = useStyles();
-
-   return (
-      <div className={classes.root}>
-         <AppBar position="static">
-            <Toolbar>
-               <IconButton
-                  edge="start"
-                  className={classes.menuButton}
-                  color="inherit"
-                  aria-label="menu"
-               >
-                  <MenuIcon />
-               </IconButton>
-               <Typography variant="h6" className={classes.title}>
-                  News
-               </Typography>
-               <Button color="inherit">Login</Button>
-            </Toolbar>
-         </AppBar>
-      </div>
-   );
-};
-
-export default Header;
+```json
+[
+  {
+    "userId": 1,
+    "id": 1,
+    "title": "sunt aut facere repellat provident occaecati excepturi optio reprehenderit",
+    "body": "quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto"
+  }
+]
 ```
 
-6. Quitamos el boton de `Login` y cambiamos el título a `Formas`.
-```
-...
-<Typography variant="h6" className={classes.title}>
-   Formas
-</Typography>
-...
-```
+Empecemos creando un nuevo archivo `Posts.js`, aquí vamos a renderizar una lista sencilla, recuerda que no nos estamos enfocando en estilos durante esta sesión.
 
-7. Si te fijas, ahora estamos usando estilos dentro de nuestro componente con la ayuda de material ui. Vamos a darle un `marginBottom` al estilo de root.
-```
-...
-root: {
-   flexGrow: 1,
-   marginBottom: theme.spacing(3)
-},
-...
-```
+```jsx
+import { useEffect, useState } from "react";
 
-8. Importamos `Header.js` dentro de `App.js`, importamos `Container` y acomodamos de la siguiente manera.
-```
-import React from 'react';
-import Container from '@material-ui/core/Container';
-import Header from './Header';
+function Posts() {
+  const [posts, setPosts] = useState([]);
 
-const App = () => {
-   return (
-      <div>
-         <Header />
-         <Container>
-            Hola
-         </Container>
-      </div>
-   );
-};
+  return (
+    <ul>
+      {posts.map((post) => (
+        <li key={post.id}>{post.title}</li>
+      ))}
+    </ul>
+  );
+}
 
-export default App;
+export default Posts;
 ```
 
-9. Creamos componente `Forma.js` y lo importamos dentro del `Container`.
-```
-import React from 'react';
-import Container from '@material-ui/core/Container';
-import Header from './Header';
-import Forma from './Forma';
+Ahora utilizaremos `fetch` para hacer la petición HTTP a la API.
 
-const App = () => {
-   return (
-      <div>
-         <Header />
-         <Container>
-            <Forma />
-         </Container>
-      </div>
-   );
-};
+```jsx
+import { useEffect, useState } from "react";
 
-export default App;
-```
+function Posts() {
+  const [posts, setPosts] = useState([]);
 
-10. Dentro del componente `Forma.js` vamos a pedir el nombre, edad, empresa y ocupación. En material ui buscamos [`Text Field`](https://material-ui.com/components/text-fields/).
+  useEffect(() => {
+    fetch("https://jsonplaceholder.typicode.com/posts")
+      .then((response) => response.json())
+      .then((data) => setPosts(data));
+  }, []);
 
-11. Importamos `Grid` y `TextField` y hacemos que los inputs sean responsivos. No olvides de ponerle `fullWidth` a los `TextField`.
-```
-import React from 'react';
-import Grid from '@material-ui/core/Grid';
-import TextField from '@material-ui/core/TextField';
+  return (
+    <ul>
+      {posts.map((post) => (
+        <li key={post.id}>{post.title}</li>
+      ))}
+    </ul>
+  );
+}
 
-const Forma = () => {
-   return (
-      <Grid container spacing={3}>
-         <Grid item xs={12} sm={6} md={3}>
-            <TextField label="Nombre" fullWidth />
-         </Grid>
-
-         <Grid item xs={12} sm={6} md={3}>
-            <TextField label="Edad" type="number" fullWidth />
-         </Grid>
-
-         <Grid item xs={12} sm={6} md={3}>
-            <TextField label="Empresa" fullWidth />
-         </Grid>
-
-         <Grid item xs={12} sm={6} md={3}>
-            <TextField label="Ocupación" fullWidth />
-         </Grid>
-      </Grid>
-   );
-};
-
-export default Forma;
+export default Posts;
 ```
 
-12. Ahora vamos a manejar los valores con el estado.
-```
-import React from 'react';
-import Grid from '@material-ui/core/Grid';
-import TextField from '@material-ui/core/TextField';
+Para el test necesitamos el archivo `Posts.test.js` y podemos empezar con lo que ya sabemos, importar `render`, `screen`, y el componente `Posts`. Después agrupar los tests usando `describe` y por último crear un test para validar que la lista no se encuentra vacía, para esto podemos usar `getAllByRole`.
 
-const Forma = () => {
-   const [nombre, setNombre] = React.useState('');
-   const [edad, setEdad] = React.useState('');
-   const [empresa, setEmpresa] = React.useState('');
-   const [ocupacion, setOcupacion] = React.useState('');
+```jsx
+import { render, screen } from "@testing-library/react";
+import Posts from "./Posts";
 
-   return (
-      <Grid container spacing={3}>
-         <Grid item xs={12} sm={6} md={3}>
-            <TextField
-               label="Nombre"
-               fullWidth
-               value={nombre}
-               onChange={(e) => setNombre(e.target.value)}
-            />
-         </Grid>
+describe("Posts component", () => {
+  test("renders posts if request succeds", () => {
+    render(<Posts />);
 
-         <Grid item xs={12} sm={6} md={3}>
-            <TextField
-               label="Edad"
-               type="number"
-               fullWidth
-               value={edad}
-               onChange={(e) => setEdad(e.target.value)}
-            />
-         </Grid>
-
-         <Grid item xs={12} sm={6} md={3}>
-            <TextField
-               label="Empresa"
-               fullWidth
-               value={empresa}
-               onChange={(e) => setEmpresa(e.target.value)}
-            />
-         </Grid>
-
-         <Grid item xs={12} sm={6} md={3}>
-            <TextField
-               label="Ocupación"
-               fullWidth
-               value={ocupacion}
-               onChange={(e) => setOcupacion(e.target.value)}
-            />
-         </Grid>
-      </Grid>
-   );
-};
-
-export default Forma;
+    const listItems = screen.getAllByRole("listitem");
+    expect(listItems).not.toHaveLength(0);
+  });
+});
 ```
 
-13. Ahora vamos a hacer que los 4 valores sean requeridos. Replicamos en los 4.
-```
-...
-<TextField
-   label="Nombre"
-   fullWidth
-   value={nombre}
-   onChange={(e) => setNombre(e.target.value)}
-   required
-   error={!nombre}
-/>
-...
-```
+En esta ocasión no hicimos TDD pero aún así nuestro test está fallando.
 
-14. Importamos y creamos un `Button` hasta el final del container.
-```
-...
-import Button from '@material-ui/core/Button';
-...
-<Grid item xs={12} align="center">
-   <Button variant="contained">Buscar</Button>
-</Grid>
+![Test 5](./assets/test-5.png)
+
+Esto es porque la lista se renderiza después de realizar la petición HTTP, esto es una operación asíncrona por lo que podría demorar unos milisegundos. Al momento de ejecutar `getAllByRole` la lista aún no existe, después de unos milisegundos la lista se renderiza pero el código de nuestro test ya terminó de ejecutar.
+
+React Testing Library cuenta con dos grupos de métodos para seleccionar elementos, los que empiezan con `get` que ya hemos utilizado y los que empiezan con `find`. La diferencia es que todos los métodos que empiezan con `find` retornan una promesa.
+
+```jsx
+import { render, screen } from "@testing-library/react";
+import Posts from "./Posts";
+
+describe("Posts component", () => {
+  test("renders posts if request succeds", async () => {
+    render(<Posts />);
+
+    const listItems = await screen.findAllByRole("listitem");
+    expect(listItems).not.toHaveLength(0);
+  });
+});
 ```
 
-15. Creamos la funcionalidad y validación del botón.
-```
-...
-const handleBuscar = () => {
-   if (!nombre || !edad || !empresa || !ocupacion) return;
+Como estamos trabajando con promesas podemos cambiar la función del test por una función `async/await`. El método `findAllByRole` espera un segundo antes de buscar en el DOM el elemento que estamos pidiendo y es posible aumentar o disminuir este tiempo.
 
-   setTimeout(() => {
-      alert('Si se encuentra.');
-   }, 1000);
-};
-...
-<Button variant="contained" onClick={handleBuscar}>
-   Buscar
-</Button>
-...
-```
+Ahora que estamos usando `await` el tiempo de espera es suficiente para que la petición a la API se resuelva y se renderice la lista.
 
-16. Código completo.
-```
-import React from 'react';
-import Grid from '@material-ui/core/Grid';
-import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
-
-const Forma = () => {
-   const [nombre, setNombre] = React.useState('');
-   const [edad, setEdad] = React.useState('');
-   const [empresa, setEmpresa] = React.useState('');
-   const [ocupacion, setOcupacion] = React.useState('');
-
-   const handleBuscar = () => {
-      if (!nombre || !edad || !empresa || !ocupacion) return;
-
-      setTimeout(() => {
-         alert('Si se encuentra.');
-      }, 1000);
-   };
-
-   return (
-      <Grid container spacing={3}>
-         <Grid item xs={12} sm={6} md={3}>
-            <TextField
-               label="Nombre"
-               fullWidth
-               value={nombre}
-               onChange={(e) => setNombre(e.target.value)}
-               required
-               error={!nombre}
-            />
-         </Grid>
-
-         <Grid item xs={12} sm={6} md={3}>
-            <TextField
-               label="Edad"
-               type="number"
-               fullWidth
-               value={edad}
-               onChange={(e) => setEdad(e.target.value)}
-               required
-               error={!edad}
-            />
-         </Grid>
-
-         <Grid item xs={12} sm={6} md={3}>
-            <TextField
-               label="Empresa"
-               fullWidth
-               value={empresa}
-               onChange={(e) => setEmpresa(e.target.value)}
-               required
-               error={!empresa}
-            />
-         </Grid>
-
-         <Grid item xs={12} sm={6} md={3}>
-            <TextField
-               label="Ocupación"
-               fullWidth
-               value={ocupacion}
-               onChange={(e) => setOcupacion(e.target.value)}
-               required
-               error={!ocupacion}
-            />
-         </Grid>
-
-         <Grid item xs={12} align="center">
-            <Button variant="contained" onClick={handleBuscar}>
-               Buscar
-            </Button>
-         </Grid>
-      </Grid>
-   );
-};
-
-export default Forma;
-```
-
-17. Resultado:
-<img src="./public/resultado.gif">
-
+![Test 6](./assets/test-6.png)
