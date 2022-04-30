@@ -55,3 +55,7 @@ Para evitar estos escenarios Jest cuenta con Funciones Mock. Los mocks capturan 
 - [`Reto 01: Mock de errores`](./Reto-01/Readme.md)
 
 - [`Reto 02: Mock e interacciones`](./Reto-02/Readme.md)
+
+## 📝 Postwork
+
+- [`Postwork`](./Postwork/Readme.md)
