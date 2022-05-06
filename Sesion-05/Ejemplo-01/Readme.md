@@ -4,6 +4,12 @@
 
 ## Ejemplo 01: useEffect Hook
 
+### Objetivos
+
+- Manejar efectos secundarios usando el hook useEffect
+
+### Desarrollo
+
 Nuestro [Proyecto Inicial](../Proyecto-Inicial/) es un formulario de inicio de sesión, después de ingresar un correo y una contraseña nos lleva a un mensaje de bienvenida. En la barra de navegación las opciones `Usuarios` y `Admin` no hacen nada pero el botón `Salir` nos lleva de nuevo al formulario.
 
 Todo esto lo logramos con el state dentro de `App`:

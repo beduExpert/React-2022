@@ -4,6 +4,13 @@
 
 ## Ejemplo 02: useState hook
 
+### Objetivos
+
+- Manipular el State de un componente mediante el hook useState
+- Emplear el State con el input de un usuario
+
+### Desarrollo
+
 Ya que todos los inputs de nuestro formulario cuentan con un event handler podemos guardar los valores de cada input en variables de estado utilizando el hook `useState`.
 
 Lo primero es importar `useState`. La primera variable que vamos a crear será para el input de descripción y la inicializaremos con un string vacío:

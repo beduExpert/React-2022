@@ -4,6 +4,12 @@
 
 ## Reto 02: Renderizado Condicional
 
+### Objetivos
+
+- Renderizar elementos dependiendo del resultado de una condicional
+
+### Desarrollo
+
 1. Dentro de la carpeta expenses crear un nuevo componente `ExpensesFilter` y agregar el siguiente código:
 
 ```jsx

@@ -4,6 +4,12 @@
 
 ## Ejemplo 03: Manejo de errores y del estado de carga
 
+### Objetivos
+
+- Manejar errores HTTP
+
+### Desarrollo
+
 Seguramente has notado en distintas páginas algún _spinner_ o elemento que indique que se está cargando la información. Vamos a integrar este _estado de carga_ en el componente `Home`. Empecemos con un nuevo state:
 
 ```jsx

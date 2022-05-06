@@ -4,6 +4,12 @@
 
 ## Ejemplo 04: Parámetros de consulta
 
+### Objetivos
+
+- Obtener parámetros de consulta con el hook useSearchParams
+
+### Desarrollo
+
 React Router también nos proporciona un hook para trabajar fácilmente con query params. Para demostrarlo haremos un par de ajustes a la ruta de la galería que ya tenemos para agregar el parámetro `grayscale`, con esto vamos a determinar si queremos la imagen en blanco y negro o en color.
 
 Empezaremos agregando un par de botones en `Gallery.js`:

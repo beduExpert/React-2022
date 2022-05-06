@@ -4,6 +4,12 @@
 
 ## Ejemplo 01: Rutas
 
+### Objetivos
+
+- Definir y utilizar rutas con React Router
+
+### Desarrollo
+
 Una vez instalado React Router lo primero que debemos hacer es envolver toda nuestra aplicación en el componente `<BrowserRouter>`, así todos los componentes de nuestra aplicación tendrán acceso a React Router. Este cambio lo hacemos en `src/index.js`:
 
 ```jsx

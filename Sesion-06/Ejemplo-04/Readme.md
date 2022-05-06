@@ -4,6 +4,12 @@
 
 ## Ejemplo 04: Custom HTTP hook
 
+### Objetivos
+
+- Crear un hook personalizado para realizar peticiones HTTP
+
+### Desarrollo
+
 Empecemos creando una nueva carpeta `src/hooks` y dentro crearemos un archivo `use-http.js`. Este nuevo hook contendrá la lógica que hemos usado hasta ahora para enviar peticiones HTTP.
 
 ```jsx

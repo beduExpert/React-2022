@@ -4,6 +4,12 @@
 
 ## Ejemplo 04: useContext Hook
 
+### Objetivos
+
+- Pasar datos entre componentes sin enviar props en cada nivel utilizando Context
+
+### Desarrollo
+
 Empecemos creando una nueva carpeta dentro de `src` la cual llamaremos `context` y dentro crearemos un nuevo archivo llamado `AuthContext.js`.
 
 ```jsx

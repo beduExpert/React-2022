@@ -4,6 +4,12 @@
 
 ## Ejemplo 02: useEffect y fetch
 
+### Objetivos
+
+- Realizar peticiones HTTP con React y el hook useEffect
+
+### Desarrollo
+
 Después de actualizar `isLoggedIn` estamos mostrando el componente `Home`. Por ahora sólo es un mensaje de bienvenida pero podemos aprovechar `useEffect` para mostrar más información del usuario.
 
 Primero vamos a replicar lo que hicimos en el ejemplo anterior, como no estamos trabajando con variables de entorno necesitamos crear nuevamente `BASE_URL`, después usaremos `fetch` para traer la información del usuario desde Firebase, la diferencia es que esta vez lo haremos con el id que guardamos en `localStorage`.

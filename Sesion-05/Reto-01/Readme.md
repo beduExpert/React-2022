@@ -4,6 +4,12 @@
 
 ## Reto 01: useEffect con dependencias
 
+### Objetivos
+
+- Controlar la cantidad de veces que se ejecuta useEffect agregando dependencias
+
+### Desarrollo
+
 El formulario cuenta con un par de validaciones que se encuentran en el componente `Login`, el correo debe contener `@` y la contraseña debe ser mayor a 6 caracteres. Si revisas a detalle el componente te darás cuenta `emailChangeHandler` y `passwordChangeHandler` usan la misma lógica para llamar `setFormIsValid` pero en orden opuesto.
 
 1. Eliminar `setFormIsValid` de ambos handlers.

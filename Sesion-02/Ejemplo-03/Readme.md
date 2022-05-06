@@ -4,6 +4,12 @@
 
 ## Ejemplo 03: prevState
 
+### Objetivos
+
+- Actualizar un state que depende de otro state anterior
+
+### Desarrollo
+
 En el ejemplo anterior creamos tres variables de estado, una por cada input. No es obligatorio manejar múltiples estados, recuerda que el state puede ser cualquier tipo de dato incluyendo objetos y arreglos por lo que podríamos usar un objeto para agrupar los valores de todos los inputs.
 
 ```jsx

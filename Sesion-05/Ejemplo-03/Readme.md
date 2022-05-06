@@ -4,6 +4,12 @@
 
 ## Ejemplo 03: useReducer Hook
 
+### Objetivos
+
+- Manipular el state con lógica compleja mediante el uso del hook useReducer
+
+### Desarrollo
+
 El componente `Login` es un claro ejemplo de un state complejo. Por una parte tenémos múltiples states y por otro lado algunos de nuestros handlers están actualizando un state que depende de otro:
 
 ```jsx

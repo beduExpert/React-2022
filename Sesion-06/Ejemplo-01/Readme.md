@@ -4,6 +4,12 @@
 
 ## Ejemplo 01: Fetch con React
 
+### Objetivos
+
+- Utilizar el método `fetch` para realizar peticiones HTTP
+
+### Desarrollo
+
 Vamos a continuar con nuestro formulario de autenticación de la sesión anterior. Ya que tenemos un usuario en la base de datos haremos una petición HTTP para obtener la información del usuario y simularemos un inicio de sesión.
 
 > **Importante:** Lo que haremos en este ejemplo es para poder realizar peticiones HTTP con React y no representa un flujo de autenticación. En un escenario real debes tener en cuenta muchos otros factores como el encriptado de contraseñas y uso de tokens. Firebase también cuenta con servicio de autenticación que te permite empezar rápidamente ya que incluye procesos de verificación de correos y opciones para recuperar contraseñas, puedes consultar la documentación [aquí](https://firebase.google.com/docs/auth).

@@ -4,6 +4,12 @@
 
 ## Ejemplo 04: Renderizado de listas
 
+### Objetivos
+
+- Mapear listas y renderizar sus elementos
+
+### Desarrollo
+
 React puede renderizar múltiples componentes que se encuentren dentro de un arreglo. Vamos a aprovechar esto y usaremos el método [`map`](https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Global_Objects/Array/map) para construir un arreglo de componentes con todos los elementos de `expenses`.
 
 ```jsx

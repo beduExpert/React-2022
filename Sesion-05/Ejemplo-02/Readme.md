@@ -4,6 +4,12 @@
 
 ## Ejemplo 02: Limpiando efectos
 
+### Objetivos
+
+- Limpiar efectos creados con el hook useEffect
+
+### Desarrollo
+
 Con el resultado del [Reto 01](../Reto-01/Readme.md) estamos validando el formulario cada vez que cambia el estado, lo cual ocurre cada vez que presionamos una tecla.
 
 Agreguemos un log en consola para verlo:

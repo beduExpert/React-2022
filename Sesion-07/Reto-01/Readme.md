@@ -4,6 +4,12 @@
 
 ## Reto 01: Terminando la autenticación
 
+### Objetivos
+
+- Desarrollar un flujo de autenticación con React Router
+
+### Desarrollo
+
 Para terminar el flujo de autenticación que teníamos nos falta poner nuevamente el botón para cerrar sesión.
 
 1. El link `Login` en la barra de navegación debe ser dinámico. Después de iniciar sesión se debe cambiar por el botón que teníamos anteriormente.

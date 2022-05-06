@@ -4,6 +4,12 @@
 
 ## Reto 02: useReducer Hook
 
+### Objetivos
+
+- Manipular el state con lógica compleja mediante el uso del hook useReducer
+
+### Desarrollo
+
 Ahora que sabes cómo funciona `useReducer` puedes eliminar el state que se encarga de manejar la contraseña ya usar la misma lógica con el reducer que ya hicimos.
 
 1. Cambia el nombre de `emailReducer` a `reducer`.

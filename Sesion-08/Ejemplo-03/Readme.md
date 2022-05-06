@@ -4,6 +4,12 @@
 
 ## Ejemplo 03: Mocks
 
+### Objetivos
+
+- Utilizar mocks para simular el método `fetch`
+
+### Desarrollo
+
 Para evitar que `fetch` haga la petición HTTP a la API debemos reemplazar `fetch` por una función mock antes de renderizar el componente `Posts`. Recuerda que `fetch` es un método global, es decir, se encuentra dentro del objeto `window`.
 
 ```jsx

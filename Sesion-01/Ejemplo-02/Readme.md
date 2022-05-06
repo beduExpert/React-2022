@@ -4,6 +4,12 @@
 
 ## Ejemplo 02: Props
 
+### Objetivos
+
+- Construir componentes y pasar datos entre ellos mediante props
+
+### Desarrollo
+
 Ahora vamos a mostrar varios gastos en lugar de uno solo, para que podamos reutilizar nuestro componente `ExpenseItem` necesitamos mover la fecha, descripción y monto al componente `App`, lo haremos en un arreglo para que sea más fácil agrupar la información.
 
 ```jsx

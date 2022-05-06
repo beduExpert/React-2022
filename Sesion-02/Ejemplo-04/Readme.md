@@ -4,6 +4,12 @@
 
 ## Ejemplo 04: Comunicación hijo a padre
 
+### Objetivos
+
+- Comunicar _event handlers_ entre componentes mediante props
+
+### Desarrollo
+
 La información de `ExpenseForm` debe pasar primero por `NewExpense` antes de poder llegar a `App`. Recuerda que no podemos saltarnos componentes. Empecemos con `NewExpense`.
 
 ```jsx

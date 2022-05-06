@@ -4,6 +4,12 @@
 
 ## Reto 01: Mock de errores
 
+### Objetivos
+
+- Utilizar mocks para simular respuestas de error
+
+### Desarrollo
+
 En la sesión anterior hicimos un mock de `fetch` para simular una petición HTTP. Ese test se considera como el _happy path_ que es cuando todo sale como se espera. Nos hace falta un test para validar el comportamiento de la aplicación cuando las cosas no salen como se espera.
 
 1. Crea un nuevo test y haz un mock de `fetch`.

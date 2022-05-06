@@ -4,6 +4,12 @@
 
 ## Ejemplo 01: React Fragments
 
+### Objetivos
+
+- Utilizar React Fragments para no renderizar nodos innecesarios
+
+### Desarrollo
+
 Ahora no es un problema pero conforme nuestra aplicación crezca es más fácil introducir más elementos `<div>` innecesarios. React cuenta con un componente especial `Fragment` que no renderiza ningún elemento, sólo retorna el contenido que recibe a través de `props.children`.
 
 ```jsx

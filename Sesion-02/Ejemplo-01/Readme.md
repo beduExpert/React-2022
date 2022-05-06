@@ -4,6 +4,12 @@
 
 ## Ejemplo 01: Event Handlers
 
+### Objetivos
+
+- Controlar las interacciones del usuario mediante _event handlers_
+
+### Desarrollo
+
 El componente `NewExpense` será el contenedor de nuestro formulario:
 
 ```jsx

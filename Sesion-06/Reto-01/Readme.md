@@ -4,6 +4,12 @@
 
 ## Reto 01: Peticiones HTTP
 
+### Objetivos
+
+- Realizar peticiones HTTP y manejar sus respuestas
+
+### Desarrollo
+
 La aplicación funciona como la teníamos, la única diferencia es que puede tardar un poco más en cargar el mensaje de bienvenida, esta demora se debe al tiempo que tarda la petición HTTP en resolverse. Aún faltan detalles como validar que el correo sea válido y guardar el id del usuario para usarlo después.
 
 1. Imprime en consola el mensaje `Correo inválido` si el usuario no existe.

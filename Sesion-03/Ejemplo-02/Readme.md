@@ -4,6 +4,12 @@
 
 ## Ejemplo 02: Estilos dinámicos con CSS Modules
 
+### Objetivos
+
+- Utilizar CSS Modules para estilizar componentes de forma dinámica
+
+### Desarrollo
+
 Con estilos dinámicos nos referimos a cambiar, agregar o quitar clases de CSS dependiendo de cierta condición. Para este ejemplo vamos a modificar un componente diferente, haremos lo mismo que hicimos en el ejemplo anterior pero con `ExpenseForm`:
 
 1. Renombrar `ExpenseForm.css` por `ExpenseForm.module.css`

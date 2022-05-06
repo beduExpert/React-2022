@@ -4,6 +4,12 @@
 
 ## Reto 02: Parámetros
 
+### Objetivos
+
+- Utilizar parámetros en el flujo de autenticación
+
+### Desarrollo
+
 En los dos últimos ejemplos hicimos una galería para demostrar cómo funcionan los parámetros y utilizar las distintas opciones que nos proporciona React Router para trabajar con dichos parámetros. Un escenario común es enviar el id de un usuario en la url a otro componente que debe extraerlo si desea obtener más información del usuario.
 
 1. Como está construida la aplicación actualmente, si el usuario no está autenticado y quiere ir a `/home` será enviado primero a `/login`, después de autenticarse se envía de regreso a `/home`. En este proceso guardamos el id del usuario en `localStorage`. Realiza los cambios necesarios para enviar el id del usuario como parámetro de ruta, es decir, después de autenticarse el usuario debe ser enviado a `/home/:userId`.

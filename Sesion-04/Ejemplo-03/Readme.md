@@ -4,6 +4,12 @@
 
 ## Ejemplo 03: useRef Hook
 
+### Objetivos
+
+- Obtener acceso a nodos del DOM o elementos de React con el hook useRef
+
+### Desarrollo
+
 Vamos a usar el hook `useRef` para crear una referencia al input del título. Actualmente si intentamos agregar un nuevo gasto todos los inputs que estén vacíos cambian a rojo, adicionalmente, aprovecharemos el nuevo ref para enfocar el input del título.
 
 Dentro de `ExpenseForm` lo primero es importar el hook:

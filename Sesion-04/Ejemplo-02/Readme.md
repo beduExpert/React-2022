@@ -4,6 +4,12 @@
 
 ## Ejemplo 02: React Portals
 
+### Objetivos
+
+- Renderizar elementos en un nodo del DOM que se encuentra afuera de la jerarquía del componente padre
+
+### Desarrollo
+
 En este ejemplo haremos un modal usando portales de React. Pero antes necesitamos crear un componente `Button` para evitar tener código duplicado. En la carpeta `src/UI` crea un archivo `Button.js` y `Button.module.css`:
 
 **`Button.js`**:

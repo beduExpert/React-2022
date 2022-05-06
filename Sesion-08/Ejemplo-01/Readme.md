@@ -4,6 +4,12 @@
 
 ## Ejemplo 01: Interacciones de usuario
 
+### Objetivos
+
+- Simular interacciones de usuario en pruebas unitarias
+
+### Desarrollo
+
 Cuando pensamos en TDD debemos primero construir un test basado en una característica, por ejemplo, _como usuario quiero poder cambiar el título utilizando un input de tipo texto_. Haremos un test para validar este escenario y después construiremos el componente adecuado. En `App.test.js` empezaremos importando lo siguiente:
 
 ```jsx

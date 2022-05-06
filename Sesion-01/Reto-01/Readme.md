@@ -4,6 +4,13 @@
 
 ## Reto 01: Props
 
+### Objetivos
+
+- Utilizar la sintaxis JSX para construir componentes de React
+- Construir componentes y pasar datos entre ellos mediante props
+
+### Desarrollo
+
 1. Crear un nuevo componente `ExpenseDate`.
 
 2. Crear `ExpenseDate.css` y agregar los siguientes estilos:

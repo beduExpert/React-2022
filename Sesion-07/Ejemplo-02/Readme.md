@@ -4,6 +4,12 @@
 
 ## Ejemplo 02: Rutas protegidas
 
+### Objetivos
+
+- Definir una ruta que requiere autenticación
+
+### Desarrollo
+
 Anteriormente el componente `<Home>` sólo se renderizaba después de iniciar sesión, perdimos esa funcionalidad en el ejemplo anterior. La ruta de este componente `/home` se considera protegida porque la intención es que sólo sea visitada por usuarios autenticados, mientras que la ruta `/` que renderiza el componente `<Public>` puede ser visitado por cualquier usuario.
 
 Empecemos creando una nueva carpeta donde tenemos los componentes, vamos a llamarla `RequireAuth` y como ya sabes vamos a crear un archivo dentro de esta carpeta llamado `RequireAuth.js`:

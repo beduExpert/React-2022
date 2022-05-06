@@ -4,6 +4,13 @@
 
 ## Ejemplo 03: Children Props
 
+### Objetivos
+
+- Construir componentes y pasar datos entre ellos mediante props
+- Utilizar children props para crear componentes que sirven como contenedores
+
+### Desarrollo
+
 En este ejemplo vamos a crear un nuevo componente `Card` que nos servirá como contenedor o wrapper de varios componentes. Este componente tendrá los siguientes estilos:
 
 ```css

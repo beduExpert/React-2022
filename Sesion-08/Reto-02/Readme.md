@@ -4,6 +4,13 @@
 
 ## Reto 02: Mock e interacciones
 
+### Objetivos
+
+- Implementar TDD para construir un componente de React
+- Utilizar mocks para simular el método `fetch`
+
+### Desarrollo
+
 Para este reto pondrás en práctica tanto los mocks como las interacciones de usuario. Es necesario crear dos archivos nuevos `Todos.js` y `Todos.test.js`. Para este nuevo componente usarás el mismo API que usamos anteriormente pero cambiaremos el endpoint para usar `/todos`.
 
 1. El primer test será para evaluar que la lista de `todos` se renderiza correctamente. La llamada a la API será con la interacción del usuario, es decir, el componente `<Todo/>` tendrá un botón que al hacer click hará una petición HTTP a la API, cuando esta petición se resuelva se renderiza la lista.

@@ -4,6 +4,12 @@
 
 ## Reto 02: Backdrop
 
+### Objetivos
+
+- Añadir backdrop a un modal utilizando React Portals
+
+### Desarrollo
+
 1. Usar los siguientes estilos para generar el backdrop:
 
 ```css

@@ -4,6 +4,12 @@
 
 ## Ejemplo 03: Parámetros de ruta
 
+### Objetivos
+
+- Obtener parámetros de ruta con el hook useParams
+
+### Desarrollo
+
 Para ver cómo funcionan los parámetros de ruta crearemos un par de componentes nuevos y una ruta para mostrar una galería de imágenes. Para no descargar y agregar imágenes al proyecto usaremos el servicio [Lorem Picsum](https://picsum.photos/).
 
 En la carpeta `src/components` crea una nueva carpeta `Gallery` y dentro crea cuatro archivos, `Gallery.js`, `Gallery.module.css`, `GalleryPicture.js`, y `GalleryPicture.module.css`. Agrega los siguientes estilos en los archivos css:

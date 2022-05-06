@@ -4,6 +4,12 @@
 
 ## Ejemplo 03: Styled Components
 
+### Objetivos
+
+- Utilizar la librería Styled Components para estilizar componentes
+
+### Desarrollo
+
 Ahora que ya instalamos la librería `Styled Components` podemos continuar trabajando en el mismo componente del ejemplo anterior `ExpenseForm`. Vamos a eliminar el `import` del módulo de CSS y lo vamos a reemplazar por el de `styled-components`:
 
 ```jsx

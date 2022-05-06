@@ -4,6 +4,12 @@
 
 ## Ejemplo 04: Props y media queries
 
+### Objetivos
+
+- Utilizar media queries para obtener un diseño responsivo
+
+### Desarrollo
+
 En el ejemplo anterior cambiamos los módulos de CSS por Styled Components en `ExpenseForm`. Al hacerlo eliminamos las clases dinámicas que validaban si la descipción del gasto estaba vacía.
 
 Los componentes creados con `styled` también aceptan clases usando `className` por lo que podríamos usar la misma estrategia que usamos anteriormente, sin embargo, podemos pasarle props al componente y usarlos dentro de los backticks cuando definimos los estilos.

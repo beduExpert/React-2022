@@ -4,6 +4,12 @@
 
 ## Ejemplo 01: Componentes
 
+### Objetivos
+
+- Utilizar la sintaxis JSX para construir componentes de React
+
+### Desarrollo
+
 Empecemos por crear un nuevo archivo dentro de la carpeta `components`, este archivo lo nombraremos `ExpenseItem.js`. En React podemos nombrar los archivos como queramos pero es una convención empezar cada palabra con mayúscula. En `ExpenseItem.js` agregamos el siguiente código:
 
 ```jsx

@@ -4,6 +4,12 @@
 
 ## Ejemplo 01: Módulos de CSS
 
+### Objetivos
+
+- Utilizar CSS Modules para estilizar componentes
+
+### Desarrollo
+
 Empecemos con un componente pequeño, vamos a usar módulos de CSS en `ExpenseDate` y para ello debemos cambiar el nombre del CSS de `ExpanseDate.css` a `ExpenseDate.module.css`. Tambien debemos cambar la forma en la que estamos importando este archivo:
 
 ```jsx

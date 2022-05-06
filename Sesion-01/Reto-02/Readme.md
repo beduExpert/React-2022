@@ -4,6 +4,12 @@
 
 ## Reto 02: Props
 
+### Objetivos
+
+- Mapear listas y renderizar sus elementos
+
+### Desarrollo
+
 1. Crear un nuevo componente `Expenses`.
 
 2. Crear `Expenses.css` y agregar los siguientes estilos:

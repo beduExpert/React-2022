@@ -4,6 +4,12 @@
 
 ## Ejemplo 02: Testing asíncrono
 
+### Objetivos
+
+- Realizar pruebas unitarias de código asíncrono
+
+### Desarrollo
+
 Para este ejemplo usaremos la API [JSON Placeholder](https://jsonplaceholder.typicode.com/). Esta API es gratuita y perfecta para hacer pruebas o prototipos, contiene varios endpoints para obtener información de muestra, el que usaremos será `/posts`, el cual retorna un arreglo de publicaciones o posts con la siguiente estructura:
 
 ```json
